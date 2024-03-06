@@ -1,0 +1,260 @@
+@import "https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&amp;display=swap";.profile_info .profile_info_iner .profile_author_name {
+    background-image: linear-gradient(to bottom right,#863ee2,#571f9e)
+}
+
+body {
+    font-family: merriweather sans,sans-serif !important;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    background: #f9f9f9
+}
+*{
+
+    font-family: merriweather sans,sans-serif;
+}
+:root {
+    --primaryColor: #182444;
+    --primaryColorDark: #091023;
+
+}
+
+.sidebar {
+    /* width: 270px; */
+    /* background: var(--primaryColor); */
+    /* padding: 20px; */
+    height: 90vh;
+    overflow: auto;
+    /* position: fixed; */
+    /* left: 0; */
+    /* top: 0; */
+    scrollbar-width: 0;
+    /* transition: .4s all ease-in-out; */
+    /* z-index: 99999; */
+}
+
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.logo {
+    margin: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--primaryColor);
+}
+
+.large_logo {
+    width: 100%;
+    padding: 20px;
+}
+
+.large_logo img {
+    width: 100%;
+}
+
+.small_logo {}
+
+.small_logo img {}
+
+.sidebar_close_icon {}
+
+.sidebar_menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar_menu li {
+    /* padding: 8px 20px; */
+}
+
+.sidebar_menu li.activebar {}
+
+.sidebar_menu li a {
+    font-size: 16px;
+    font-weight: 300;
+    transition: .3s;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: 24px auto;
+    grid-gap: 15px;
+    align-items: center;
+    position: relative;
+    background: 0 0;
+    color: #8f91aa;
+    font-family: merriweather sans, sans-serif;
+    padding: 10px 10px 10px 26px;
+    border-radius: 0;
+}
+
+.nav_icon_small {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.nav_icon_small i {}
+
+.nav_title {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    width: 100%;
+}
+
+.sidebar_menu li ul li a i {}
+
+.sidebar_menu li ul li a {}
+
+.sidebar_menu li ul li {}
+
+.sidebar_menu li ul {
+    /* display: none; */
+    /* transform: scale(0); */
+    transition: .4s all ease-in-out;
+    height: 0;
+    opacity: 0;
+}
+
+.main_content {
+    /* display: flex; */
+    margin-left: 270px;
+}
+
+/* header part start here  */
+.header_iner {
+    /* height: 100px; */
+    background: #ffffff;
+    width: 100%;
+    box-shadow: 2px 3px 5px 3px #adadad;
+}
+
+.has-arrow {
+    position: relative;
+}
+
+.metismenu .has-arrow::after {
+    position: absolute;
+    content: '';
+    transform: rotate(-90deg) translate(0, -50%);
+    transform-origin: top;
+    top: 50%;
+    transition: all .3s ease-out;
+    right: 40px;
+    content: "\e64b";
+    font-family: themify;
+    color: #a5adc6;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* header part end here  */
+.main_content_iner {
+    padding: 20px;
+}
+
+.nav_title span {}
+
+.nav_title i {}
+
+.sidebar_menu li.active {
+    background-color: var(--primaryColorDark);
+}
+
+.sidebar_menu li.active ul {
+    display: block;
+    /* transform: scale(1); */
+    /* list-style: none; */
+    /* transition: .4s all ease-in-out; */
+    height: 100%;
+    opacity: 1;
+}
+
+.sidebar_menu li.active .nav_title i {
+    transform: rotate(90deg);
+}
+
+.sidebar_menu li:hover {
+    background-color: var(--primaryColorDark);
+}
+
+.profile_thumb {}
+
+.profile_thumb img {
+    width: 40px;
+    border: 1px solid #e1e1e1;
+    border-radius: 50%;
+    height: 40px;
+    box-shadow: 0 0 10px #dcdcdc;
+}
+
+.header_iner {
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    width: 100%;
+}
+
+.author_name {
+
+    margin: 0px 10px;
+}
+
+.author_name h4 {
+    color: #434750;
+    margin-bottom: 0;
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.author_name p {
+
+    margin: 0;
+
+    font-size: 12px;
+
+    color: gray;
+}
+.proMenu a{
+    font-size: 14px;
+    text-transform: capitalize;
+}
+.rmmargin{
+    margin-left: 0 !important;
+}
+.menushow{
+    display: none;
+}
+.mobilemenushow,.topM{
+    display: none ;
+}
+@media(max-width: 768px){
+    .sidebar,.menuHide,.menushow{
+        /* display: none; */
+    }
+    .main_content{
+        margin-left: 0;
+    }
+    .mobilemenushow{
+        /* display: block; */
+    }
+    .topM{
+        /* display: flex; */
+    }
+}
+
+/* admin panel part start here  */
+.main-header .nav-link{
+    color: #000 !important;
+}
+.wrapper .navbar{
+    width: auto;
+}
+.brand-image{
+    
+}
