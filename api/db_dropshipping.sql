@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2024 at 05:34 AM
+-- Generation Time: Mar 11, 2024 at 02:05 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -284,6 +284,7 @@ CREATE TABLE `categorys` (
   `parent_id` int(11) DEFAULT 0,
   `sort_order` int(11) DEFAULT 0,
   `file` varchar(255) DEFAULT NULL,
+  `bg_images` varchar(255) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   `mobile_view_class` varchar(255) DEFAULT NULL,
   `keyword` varchar(255) DEFAULT NULL,
@@ -295,35 +296,17 @@ CREATE TABLE `categorys` (
 -- Dumping data for table `categorys`
 --
 
-INSERT INTO `categorys` (`id`, `name`, `percentage_amt`, `slug`, `description`, `meta_title`, `meta_description`, `meta_keyword`, `parent_id`, `sort_order`, `file`, `status`, `mobile_view_class`, `keyword`, `created_at`, `updated_at`) VALUES
-(1, 'Men\'s', 10, 'men-s', NULL, NULL, NULL, NULL, 0, 0, '/backend/files/q9KPGITnXWdgrcFEjcRe.gif', 1, 'null', NULL, '2023-12-18 05:33:38', '2024-03-05 19:48:32'),
-(2, 'Women\'s', 20, 'women-s', NULL, 'null', 'null', 'null', 0, 0, '/backend/files/xCE8LlDqD44QSYrHu6Hw.png', 1, 'null', 'null', '2023-12-18 05:33:59', '2024-03-05 19:55:05'),
-(3, 'Hoodie (Men\'s)', NULL, 'hoodie-men-s-', NULL, 'null', 'null', 'null', 1, 0, '/backend/files/FnEJkodCItaZVLS7heYO.gif', 1, 'null', 'null', '2023-12-18 05:34:25', '2024-02-01 15:49:47'),
-(4, 'Men\'s Pollover Hoodie', NULL, 'men-s-pollover-hoodie', NULL, NULL, NULL, NULL, 3, 0, '', 1, NULL, NULL, '2023-12-18 05:36:48', '2023-12-18 05:36:48'),
-(5, 'Hoodie (Women\'s)-', NULL, 'hoodie-women-s--', NULL, NULL, NULL, NULL, 2, 0, '/backend/files/LMIrtOHuoRPomrd9Dv3F.png', 1, 'null', '88888', '2023-12-18 06:18:18', '2024-03-05 19:10:35'),
-(6, 'Women\'s Pollover Hoodies', NULL, 'women-s-pollover-hoodies', NULL, NULL, NULL, NULL, 5, 0, '', 1, NULL, NULL, '2023-12-18 06:18:37', '2023-12-18 06:18:37'),
-(7, 'T-Shirt (Men\'s)', NULL, 't-shirt-men-s-', NULL, 'null', 'null', 'null', 1, 0, '/backend/files/VSRRcJAzgxgVyTAlwub2.png', 1, 'null', 'null', '2023-12-18 07:11:52', '2024-01-29 08:21:28'),
-(8, 'T-Shirt (Women\'s)', NULL, 't-shirt-women-s-', NULL, 'null', 'null', 'null', 2, 0, '/backend/files/0EKE2HZPCk1E9ObKJsVd.png', 1, 'null', 'null', '2023-12-18 07:12:26', '2024-01-29 08:34:19'),
-(9, 'Long Sleeve T-shirt', NULL, 'long-sleeve-t-shirt', NULL, 'null', 'null', 'null', 7, 0, '', 1, 'null', 'null', '2023-12-18 07:51:10', '2023-12-18 07:56:55'),
-(10, 'Short Sleeve T-Shirt', NULL, 'short-sleeve-t-shirt', NULL, NULL, NULL, NULL, 7, 0, '', 1, NULL, NULL, '2023-12-18 07:56:43', '2023-12-18 07:56:43'),
-(11, 'Kid\'s', 10, 'kid-s', NULL, 'null', 'null', 'null', 0, 0, '/backend/files/AuFnHQgMhZaO7KyJGFu8.png', 1, 'null', 'null', '2023-12-18 08:33:35', '2024-01-28 16:48:15'),
-(12, 'Kid\'s boy T-shirt', NULL, 'kid-s-boy-t-shirt', NULL, 'null', 'null', 'null', 11, 0, '/backend/files/mVjoADFlbysUTAQxqGYL.png', 1, 'null', 'null', '2023-12-18 08:33:58', '2024-01-29 12:36:44'),
-(13, 'Long weekend Crewneck Sweatshirt', NULL, 'long-weekend-crewneck-sweatshirt', NULL, 'null', 'null', 'null', 7, 0, '', 1, 'null', 'null', '2023-12-18 08:43:40', '2023-12-18 08:55:26'),
-(14, 'Short Sleeve T-Shirt (Women\'s)', NULL, 'short-sleeve-t-shirt-women-s-', NULL, NULL, NULL, NULL, 8, 0, '', 1, NULL, NULL, '2023-12-18 10:44:09', '2023-12-18 10:44:09'),
-(15, 'Full Zip Hoodie', NULL, 'full-zip-hoodie', NULL, NULL, NULL, NULL, 3, 0, '', 1, NULL, NULL, '2023-12-18 11:12:20', '2023-12-18 11:12:20'),
-(16, 'Kid\'s Boys Hoodie', NULL, 'kid-s-boys-hoodie', NULL, 'null', 'null', 'null', 11, 0, '/backend/files/Uwg77KpZTrOAEKQ806zA.png', 1, 'null', 'null', '2023-12-18 12:21:32', '2023-12-22 06:43:17'),
-(17, 'Performance T-Shirt', NULL, 'performance-t-shirt', NULL, 'null', 'null', 'null', 7, 0, '', 1, 'null', 'null', '2023-12-18 15:41:29', '2023-12-18 15:41:57'),
-(18, 'V-neek Sweater', NULL, 'v-neek-sweater', NULL, 'null', 'null', 'null', 1, 0, '/backend/files/xPWvDQbxwgjJLyGrIIoN.png', 1, 'null', 'null', '2023-12-18 15:52:35', '2023-12-22 06:41:51'),
-(19, 'Polo T-shirt (Women\'s)', NULL, 'polo-t-shirt-women-s-', NULL, NULL, NULL, NULL, 8, 0, '', 1, NULL, NULL, '2023-12-19 05:35:58', '2023-12-19 05:35:58'),
-(20, 'Quarter Zip Pullover Sweater', NULL, 'quarter-zip-pullover-sweater', NULL, 'null', 'null', 'null', 1, 0, '/backend/files/vLr5Mog6miTu9Y7yHcMF.png', 1, 'null', 'null', '2023-12-19 07:02:43', '2023-12-22 06:42:06'),
-(21, 'V-Neck T-shirt (Women\'s)', NULL, 'v-neck-t-shirt-women-s-', NULL, NULL, NULL, NULL, 8, 0, '', 1, NULL, NULL, '2023-12-19 07:24:10', '2023-12-19 07:24:10'),
-(22, 'Performance Shirt', NULL, 'performance-shirt', NULL, NULL, NULL, NULL, 8, 0, '', 1, NULL, NULL, '2023-12-19 07:42:08', '2023-12-19 07:42:08'),
-(23, 'Tri-Blend Zip Hoodie', NULL, 'tri-blend-zip-hoodie', NULL, NULL, NULL, NULL, 3, 0, '', 1, NULL, NULL, '2023-12-19 07:50:24', '2023-12-19 07:50:24'),
-(24, 'Polo T-Shirt', NULL, 'polo-t-shirt', NULL, NULL, NULL, NULL, 7, 0, '', 1, NULL, NULL, '2023-12-19 07:58:29', '2023-12-19 07:58:29'),
-(25, 'Short Sleeve Raglan T-Shirt', NULL, 'short-sleeve-raglan-t-shirt', NULL, NULL, NULL, NULL, 8, 0, '', 1, NULL, NULL, '2023-12-19 08:31:31', '2023-12-19 08:31:31'),
-(26, 'Long Weekend Crewneck Sweatshirt (Women\'s)', NULL, 'long-weekend-crewneck-sweatshirt-women-s-', NULL, NULL, NULL, NULL, 8, 0, '', 1, NULL, NULL, '2023-12-19 08:44:54', '2023-12-19 08:44:54'),
-(27, 'Panjabi', 10, 'panjabi', NULL, 'Panjabi', 'Panjabi', 'Panjabi', 0, 0, '', 1, 'null', 'null', '2023-12-19 08:44:54', '2024-02-12 14:43:38'),
-(28, 'Gadgets', 10, 'gadgets', NULL, 'null', 'null', 'null', 0, 0, '/backend/files/ErJeyLysVoP8R8sW9keP.png', 1, 'null', 'null', '2024-01-24 18:22:47', '2024-01-28 16:48:48');
+INSERT INTO `categorys` (`id`, `name`, `percentage_amt`, `slug`, `description`, `meta_title`, `meta_description`, `meta_keyword`, `parent_id`, `sort_order`, `file`, `bg_images`, `status`, `mobile_view_class`, `keyword`, `created_at`, `updated_at`) VALUES
+(1, 'New Store', NULL, 'new-store', NULL, 'New Store', 'New Store', 'New Store', 0, 0, '', NULL, 1, 'null', 'New Store', '2024-03-07 17:39:24', '2024-03-07 17:53:45'),
+(2, 'Basic Store', 20, 'basic-store', NULL, 'Basic Store', 'Basic Store', 'Basic Store', 0, 0, '', NULL, 1, NULL, 'Basic Store', '2024-03-07 17:39:42', '2024-03-07 17:39:42'),
+(3, 'Standard Store', 30, 'standard-store', NULL, 'Standard Store', 'Standard Store', 'Standard Store', 0, 0, '', NULL, 1, NULL, 'Standard Store', '2024-03-07 17:40:00', '2024-03-07 17:40:00'),
+(4, 'Exclusive Store', 40, 'exclusive-store', NULL, 'Exclusive Store', 'Exclusive Store', 'Exclusive Store', 0, 0, '', NULL, 1, NULL, 'Exclusive Store', '2024-03-07 17:40:18', '2024-03-07 17:40:18'),
+(5, 'Casio', 10, 'casio', NULL, 'Casio', 'Casio', 'Casio', 1, 0, '', NULL, 1, 'null', 'Casio', '2024-03-07 17:40:36', '2024-03-07 17:54:02'),
+(6, 'Lego', NULL, 'lego', NULL, 'Lego', 'Lego', 'Lego', 1, 0, '', NULL, 1, NULL, 'Lego', '2024-03-07 17:40:51', '2024-03-07 17:40:51'),
+(7, 'Logitech', NULL, 'logitech', NULL, 'Logitech', 'Logitech', 'Logitech', 1, 0, '', NULL, 1, NULL, 'Logitech', '2024-03-07 17:41:13', '2024-03-07 17:41:13'),
+(8, 'Lego', NULL, 'lego', NULL, 'Lego', 'Lego', 'Lego', 2, 0, '', NULL, 1, NULL, 'Lego', '2024-03-07 17:42:58', '2024-03-07 17:42:58'),
+(9, 'Casio', NULL, 'casio', NULL, 'Casio', 'Casio', 'Casio', 2, 0, '', NULL, 1, NULL, 'Casio', '2024-03-07 17:43:29', '2024-03-07 17:43:29'),
+(10, 'Logitech', NULL, 'logitech', NULL, 'Logitech', 'Logitech', 'Logitech', 2, 0, '', NULL, 1, NULL, 'Logitech', '2024-03-07 17:43:53', '2024-03-07 17:43:53');
 
 -- --------------------------------------------------------
 
@@ -1288,6 +1271,24 @@ INSERT INTO `leave_type` (`id`, `name`, `code`, `status`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `method` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `parameters` varchar(255) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `manufacturers`
 --
 
@@ -1599,21 +1600,55 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `description_short` text DEFAULT NULL,
+  `description_full` text DEFAULT NULL,
+  `question` text DEFAULT NULL,
+  `answer` text DEFAULT NULL,
+  `categoryId` int(11) DEFAULT NULL,
+  `entry_by` int(11) DEFAULT NULL,
+  `thumnail_img` varchar(255) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `description`) VALUES
-(1, 'dfgdfg', 'dd'),
-(2, '1.95', 'ssdf'),
-(3, 'sdfsdfsdf', 'ss'),
-(4, 'zxc', 'pop'),
-(5, 'Beef tozo', 'l;;l;'),
-(6, 'xcv', 'xcvxcv');
+INSERT INTO `posts` (`id`, `name`, `slug`, `description_short`, `description_full`, `question`, `answer`, `categoryId`, `entry_by`, `thumnail_img`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Announcement', 'announcement', '', '<h6 data-v-inspector=\"pages/partner/community/announcement.vue:34:37\">Online recharge:</h6><p data-v-inspector=\"pages/partner/community/announcement.vue:35:37\">Enter\r\n the amount - select the payment method - obtain the payment QR code and\r\n pay using the payment application - please pay within the specified \r\ntime (within 30 minutes) - payment is completed - wait for the system to\r\n automatically confirm. It is prohibited to reuse QR codes for payment, \r\nand a new payment code must be obtained for each recharge. </p><p></p>', '', '', 1, 1, '/backend/files/6sqrvTOFNMboJxByFYIS.png', 1, '2024-03-10 18:35:57', '2024-03-10 18:35:57'),
+(2, 'Announcement', 'announcement', '', '<h6 data-v-inspector=\"pages/partner/community/announcement.vue:44:37\">Online recharge:</h6><p data-v-inspector=\"pages/partner/community/announcement.vue:45:37\">Enter\r\n the amount - select the payment method - obtain the payment QR code and\r\n pay using the payment application - please pay within the specified \r\ntime (within 30 minutes) - payment is completed - wait for the system to\r\n automatically confirm. It is prohibited to reuse QR codes for payment, \r\nand a new payment code must be obtained for each recharge. </p><p></p>', '', '', 1, 1, '/backend/files/eJxV8SezpYqrVmkmaQhG.png', 1, '2024-03-10 18:36:55', '2024-03-10 18:36:55'),
+(3, 'Announcement', 'announcement', '', '<h6 data-v-inspector=\"pages/partner/community/announcement.vue:44:37\">Online recharge:</h6><p data-v-inspector=\"pages/partner/community/announcement.vue:45:37\">Enter\r\n the amount - select the payment method - obtain the payment QR code and\r\n pay using the payment application - please pay within the specified \r\ntime (within 30 minutes) - payment is completed - wait for the system to\r\n automatically confirm. It is prohibited to reuse QR codes for payment, \r\nand a new payment code must be obtained for each recharge. </p><p></p>', '', '', 1, 1, '/backend/files/2Tqp9iow8CQTavozWohf.png', 1, '2024-03-10 18:37:21', '2024-03-10 12:44:29'),
+(4, 'Event', 'event', '', '<p>Enter the amount - select the payment method - obtain the payment QR \r\ncode and pay using the payment application - please pay within the \r\nspecified time (within 30 minutes) - payment is completed - wait for the\r\n system to automatically confirm. It is prohibited to reuse QR codes for\r\n payment, and a new payment code must be obtained for each recharge. </p>', '', '', 2, 1, '/backend/files/THHyZ38q3DuCmusFB6yc.png', 1, '2024-03-10 18:47:39', '2024-03-10 18:47:39'),
+(6, 'What is Shopify top and how does it work?', 'what-is-shopify-top-and-how-does-it-work-', '', '', 'What is Shopify top and how does it work?', 'Shopify Top Products: This could refer to the top-selling products within a Shopify store. Shopify provides analytics and reporting tools that allow merchants to track their sales performance, including which products are selling the most. Merchants can use this information to optimize their product offerings, marketing strategies, and inventory management.', 3, 1, NULL, 1, '2024-03-10 18:58:05', '2024-03-10 18:58:05'),
+(7, 'How much does it cost to open a store on  Shopifytop?', 'how-much-does-it-cost-to-open-a-store-on-shopifytop-', '', '', 'How much does it cost to open a store on  Shopifytop?', 'It seems there might be some confusion. \"Shopifytop\" isn\'t a platform or service that I\'m aware of. However, I assume you\'re referring to Shopify, which is a popular e-commerce platform that allows businesses to create and manage online stores.', 3, 1, NULL, 1, '2024-03-10 18:58:54', '2024-03-10 18:58:54'),
+(8, 'How much working capital does it take to open a store on Shopifytop?', 'how-much-working-capital-does-it-take-to-open-a-store-on-shopifytop-', '', '', 'How much working capital does it take to open a store on Shopifytop?', 'Opening a store on Shopify doesn\'t necessarily require a significant amount of working capital compared to starting a traditional brick-and-mortar store. However, the amount of working capital needed can vary depending on various factors such as:', 3, 1, NULL, 1, '2024-03-10 18:59:36', '2024-03-10 18:59:36'),
+(9, 'Do I need to advertise my store, or find products?', 'do-i-need-to-advertise-my-store-or-find-products-', '', '', 'Do I need to advertise my store, or find products?', 'Both advertising your store and finding products are essential components of running a successful e-commerce business, including a store on Shopify.', 3, 1, NULL, 1, '2024-03-10 19:00:14', '2024-03-10 19:00:14'),
+(10, 'Event-1', 'event', '', '<p>Enter the amount - select the payment method - obtain the payment QR \r\ncode and pay using the payment application - please pay within the \r\nspecified time (within 30 minutes) - payment is completed - wait for the\r\n system to automatically confirm. It is prohibited to reuse QR codes for\r\n payment, and a new payment code must be obtained for each recharge. </p>', '', '', 2, 1, '/backend/files/THHyZ38q3DuCmusFB6yc.png', 1, '2024-03-10 18:47:39', '2024-03-10 18:47:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `post_category`
+--
+
+CREATE TABLE `post_category` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `post_category`
+--
+
+INSERT INTO `post_category` (`id`, `name`, `status`) VALUES
+(1, 'Announcement', 1),
+(2, 'Event', 1),
+(3, 'FAQs', 1);
 
 -- --------------------------------------------------------
 
@@ -1680,7 +1715,7 @@ INSERT INTO `product` (`id`, `name`, `slug`, `description`, `description_short`,
 (4, 'The iPhone 15', 'the-iphone-15', NULL, '', '', 500, 600, 700, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/4sKcdWfqXFS8VTAGXVSD.jpg', 1, 1, NULL, '2024-03-05 21:16:09', '2024-03-05 21:16:09'),
 (5, 'The iPhone 15 Pro', 'the-iphone-15-pro', NULL, '[object HTMLDivElement]', '[object HTMLDivElement]', 800, 52, 52, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/7XhvkSN0m5XUzHzdV7Xk.jpg', 1, 1, NULL, '2024-03-05 21:21:43', '2024-03-05 21:21:43'),
 (6, 'The iPhone 15 Pro111', 'the-iphone-15-pro111', NULL, '<p>The iPhone 15 Pro is the most advanced iPhone yet, with a new titanium \r\ndesign, a new triple-lens camera system with a 5x telephoto zoom, and \r\nthe latest A17 Bionic chip. It\'s the perfect phone for power users and \r\ncreative professionals who want the best of the best.&nbsp;Our exclusive \r\noffer brings you a chance to win this astonishing prize while purchasing\r\n our remarkable product. With each purchase, not only do you acquire an \r\nexceptional item, but you also enter the draw for the chance to win big.\r\n This limited-time offer is designed to make your dreams a reality. Be \r\npart of this incredible opportunity and step into a world of \r\npossibilities. Terms and conditions apply.<b>111111111111</b></p>', '<p>The iPhone 15 Pro is the most advanced iPhone yet, with a new titanium \r\ndesign, a new triple-lens camera system with a 5x telephoto zoom, and \r\nthe latest A17 Bionic chip. It\'s the perfect phone for power users and \r\ncreative professionals who want the best of the best.&nbsp;Our exclusive \r\noffer brings you a chance to win this astonishing prize while purchasing\r\n our remarkable product. With each purchase, not only do you acquire an \r\nexceptional item, but you also enter the draw for the chance to win big.\r\n This limited-time offer is designed to make your dreams a reality. Be \r\npart of this incredible opportunity and step into a world of \r\npossibilities. Terms and conditions apply.<b><u>222222222222222222</u></b></p>', 50, 60, 50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/mXcN9DdRahRiGxwP7t9o.jpg', 1, 1, NULL, '2024-03-05 23:31:59', '2024-03-05 19:09:46'),
-(7, 'MyBooks1111', 'mybooks1111', NULL, '<p><span style=\"color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">by multiplying the total percentage amount by the selling price and then dividing by 100 to get the percentage.</span></p>', '<p><span style=\"color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">by multiplying the total percentage amount by the selling price and then dividing by 100 to get the percentage.</span></p>', 500, 150, 600, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/W8pMRmMlKed7UGw4MvM2.jpg', 1, 1, NULL, '2024-03-06 09:47:26', '2024-03-06 09:47:26');
+(7, 'MyBooks1111', 'mybooks1111', NULL, '<p><span style=\"color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">by multiplying the total percentage amount by the selling price and then dividing by 100 to get the percentage.</span></p>', '<p><span style=\"color: rgb(13, 13, 13); font-family: Söhne, ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, Roboto, Ubuntu, Cantarell, &quot;Noto Sans&quot;, sans-serif, &quot;Helvetica Neue&quot;, Arial, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: pre-wrap; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;\">by multiplying the total percentage amount by the selling price and then dividing by 100 to get the percentage.</span></p>', 500, 150, 600, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '/backend/files/Q7ObFR5XIsnxiaARN508.jpg', 1, 1, NULL, '2024-03-06 09:47:26', '2024-03-08 11:55:40');
 
 -- --------------------------------------------------------
 
@@ -6271,6 +6306,10 @@ CREATE TABLE `users` (
   `othersway_connect` varchar(255) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `entry_by` int(11) DEFAULT NULL,
+  `register_ip` varchar(255) DEFAULT NULL,
+  `lastlogin_ip` varchar(255) DEFAULT NULL,
+  `lastlogin_country` varchar(255) DEFAULT NULL,
+  `lastlogin_datetime` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` int(11) DEFAULT NULL
@@ -6280,13 +6319,14 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `inviteCode`, `ref_id`, `employee_id`, `role_id`, `email`, `name`, `phone_number`, `image`, `doc_file`, `address`, `address_1`, `address_2`, `website`, `github`, `gender`, `date_of_birth`, `twitter`, `instagram`, `nationality_id`, `state_id`, `otp`, `facebook`, `wallet_balance`, `show_password`, `password`, `with_show_password`, `with_password`, `email_verified_at`, `telegram`, `whtsapp`, `othersway_connect`, `remember_token`, `entry_by`, `created_at`, `updated_at`, `status`) VALUES
-(1, '0000123', NULL, 4, 1, 'admin@gmail.com', 'Admin', '000000001', '/backend/files/hZkagctUSINKsFU64UJr.png', NULL, 'Dhaka', '', '', 'http://localhost:3000/profile', 'http://localhost:3000/profile', '', '0000-00-00', 'http://localhost:3000/profile', 'http://localhost:3000/profile', 0, 0, NULL, 'http://localhost:3000/profile', NULL, 'admin', '$2y$10$S.DjOMlaQ1ZcTSm6zUzRKOZtDL7vO4ZI0ZjgCjSn/TvdpXpbl5eBu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2023-06-22 03:20:43', '2024-02-24 07:07:38', 1),
-(8, '0000125', 1, NULL, 2, 'ahmed@gmail.com', 'ahmed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9513, NULL, NULL, 'ahmed@gmail.com', '$2y$10$fdLD01DcpwnyZ7IuqAMLguh9ox/0KWFHOfm5jMH1ODp3VK.uU431u', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:18:03', '2024-03-02 18:18:03', NULL),
-(9, '0000126', 8, NULL, 2, 'bc@gmail.com', 'bc', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8782, NULL, NULL, 'bc@gmail.com', '$2y$10$UdGloSr1R2yrRMzJ7qbEj.AeayMVvy6Pkbdi3WSyiF/rI2XKiQ.iC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:23:49', '2024-03-02 18:23:49', NULL),
-(10, '5879249', 8, NULL, 2, 'ibraheem@gmail.com', 'ibraheem', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1289, NULL, NULL, 'ibraheem@gmail.com', '$2y$10$b1Go/QpyOXR87AcdFf3Bp..4C2pSLpCqtC5rgJq2YJ1yBWqCXpiqm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:26:27', '2024-03-02 18:26:27', NULL),
-(11, '7312579', 8, NULL, 2, 'assconsultnat@gmail.com', 'assconsultnat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5214, NULL, NULL, 'assconsultnat@gmail.com', '$2y$10$5qy8rKb3WDy4xaAfNHDEQOCM72SnhPCS9LWJrC7s8IhAZIytWh2KC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:28:51', '2024-03-02 18:28:51', NULL),
-(12, '8120242', 8, NULL, 2, 'kumar@gmail.com', 'kumar', '01915728982', '/backend/files/EFjC0lPhpmh1dgz5KAzJ.jpg', '/backend/files/CqRlnnV0RjtfVzSDJ0a2.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4664, NULL, NULL, 'kumar@gmail.com', '$2y$10$070GN5pczGAgE5sL7cIXwuceQCF.jRoJNtaL4bRj.zgtfTeD5Kvza', 'support@gmail.com', '$2y$10$/IaRhrNzvBOhDSYU8GIfz.0mQbYmM11TQosm9cktXnEWzmj4dzCFK', NULL, '3434', '3433333', '33333', '2', NULL, '2024-03-02 18:30:12', '2024-03-04 14:08:18', 1);
+INSERT INTO `users` (`id`, `inviteCode`, `ref_id`, `employee_id`, `role_id`, `email`, `name`, `phone_number`, `image`, `doc_file`, `address`, `address_1`, `address_2`, `website`, `github`, `gender`, `date_of_birth`, `twitter`, `instagram`, `nationality_id`, `state_id`, `otp`, `facebook`, `wallet_balance`, `show_password`, `password`, `with_show_password`, `with_password`, `email_verified_at`, `telegram`, `whtsapp`, `othersway_connect`, `remember_token`, `entry_by`, `register_ip`, `lastlogin_ip`, `lastlogin_country`, `lastlogin_datetime`, `created_at`, `updated_at`, `status`) VALUES
+(1, '0000123', NULL, 4, 1, 'admin@gmail.com', 'Admin', '000000001', '/backend/files/hZkagctUSINKsFU64UJr.png', NULL, 'Dhaka', '', '', 'http://localhost:3000/profile', 'http://localhost:3000/profile', '', '0000-00-00', 'http://localhost:3000/profile', 'http://localhost:3000/profile', 0, 0, NULL, 'http://localhost:3000/profile', NULL, 'admin', '$2y$10$S.DjOMlaQ1ZcTSm6zUzRKOZtDL7vO4ZI0ZjgCjSn/TvdpXpbl5eBu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '127.0.0.1', '', '2024-03-10 23:35:07', '2023-06-22 03:20:43', '2024-03-10 17:35:07', 1),
+(8, '0000125', 1, NULL, 2, 'ahmed@gmail.com', 'ahmed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9513, NULL, NULL, 'ahmed@gmail.com', '$2y$10$fdLD01DcpwnyZ7IuqAMLguh9ox/0KWFHOfm5jMH1ODp3VK.uU431u', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:18:03', '2024-03-02 18:18:03', 1),
+(9, '0000126', 8, NULL, 2, 'bc@gmail.com', 'bc', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8782, NULL, NULL, 'bc@gmail.com', '$2y$10$UdGloSr1R2yrRMzJ7qbEj.AeayMVvy6Pkbdi3WSyiF/rI2XKiQ.iC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:23:49', '2024-03-02 18:23:49', 1),
+(10, '5879249', 8, NULL, 2, 'ibraheem@gmail.com', 'ibraheem', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1289, NULL, NULL, 'ibraheem@gmail.com', '$2y$10$b1Go/QpyOXR87AcdFf3Bp..4C2pSLpCqtC5rgJq2YJ1yBWqCXpiqm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:26:27', '2024-03-02 18:26:27', 1),
+(11, '7312579', 8, NULL, 2, 'assconsultnat@gmail.com', 'assconsultnat', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5214, NULL, NULL, 'assconsultnat@gmail.com', '$2y$10$5qy8rKb3WDy4xaAfNHDEQOCM72SnhPCS9LWJrC7s8IhAZIytWh2KC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:28:51', '2024-03-02 18:28:51', 1),
+(12, '8120242', 8, NULL, 2, 'kumar@gmail.com', 'kumar', '01915728982', '/backend/files/irk0SpXmtHfJQTeltu1o.jpg', '/backend/files/1sreivzKaR87nVykJnvG.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 4664, NULL, NULL, 'kumar@gmail.com', '$2y$10$070GN5pczGAgE5sL7cIXwuceQCF.jRoJNtaL4bRj.zgtfTeD5Kvza', 'support@gmail.com', '$2y$10$/IaRhrNzvBOhDSYU8GIfz.0mQbYmM11TQosm9cktXnEWzmj4dzCFK', NULL, '01915728986', '01915728984', '01915728985', '2', NULL, '127.0.0.1', '5.193.226.195', 'United Arab Emirates', '2024-03-10 01:21:08', '2024-03-02 18:30:12', '2024-03-09 19:21:08', 1),
+(13, '1679803', 11, NULL, 2, 'partner@gmail.com', 'partner', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1155, NULL, NULL, 'partner@gmail.com', '$2y$10$IJJLeUMaM9NQz/vDdhgeru4dl/N87W/rF8N0pfMjlQU515NcrxU1m', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '127.0.0.1', '127.0.0.1', '', '2024-03-10 23:35:32', '2024-03-09 19:29:28', '2024-03-10 17:35:32', 1);
 
 -- --------------------------------------------------------
 
@@ -6312,7 +6352,8 @@ INSERT INTO `verifyemail` (`id`, `email`, `code`, `status`, `created_at`, `updat
 (2, 'bc@gmail.com', '8782', 1, '2024-03-02 18:20:59', '2024-03-02 18:23:49'),
 (3, 'ibraheem@gmail.com', '1289', 1, '2024-03-02 18:25:45', '2024-03-02 18:26:27'),
 (4, 'assconsultnat@gmail.com', '5214', 1, '2024-03-02 18:28:19', '2024-03-02 18:28:51'),
-(5, 'kumar@gmail.com', '4664', 1, '2024-03-02 18:29:38', '2024-03-02 18:30:12');
+(5, 'kumar@gmail.com', '4664', 1, '2024-03-02 18:29:38', '2024-03-02 18:30:12'),
+(6, 'partner@gmail.com', '1155', 1, '2024-03-09 19:28:34', '2024-03-09 19:28:34');
 
 -- --------------------------------------------------------
 
@@ -6497,6 +6538,12 @@ ALTER TABLE `leave_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
@@ -6568,6 +6615,12 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `post_category`
+--
+ALTER TABLE `post_category`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -6741,7 +6794,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categorys`
 --
 ALTER TABLE `categorys`
-  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `circumstances`
@@ -6852,6 +6905,12 @@ ALTER TABLE `leave_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
@@ -6915,7 +6974,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `post_category`
+--
+ALTER TABLE `post_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -7017,13 +7082,13 @@ ALTER TABLE `ticket_history`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `verifyemail`
 --
 ALTER TABLE `verifyemail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
