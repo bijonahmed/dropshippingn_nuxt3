@@ -20,6 +20,7 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Dropshipping\DropShiProductController;
+use App\Http\Controllers\Post\PostController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,7 +48,6 @@ Route::group([
     Route::get('showProfileData', [AuthController::class, 'showProfileData']);
     Route::post('password/email', [ForgotPasswordController::class, 'sendPasswordResetEmail']);
     Route::post('password/reset', [ResetPasswordController::class, 'updatePassword']);
-    
 });
 Route::group([
     'prefix' => 'order'
@@ -83,6 +83,7 @@ Route::group([
     'prefix' => 'user'
 ], function () {
     Route::get('allUsers', [UserController::class, 'AllUsersList']);
+    Route::get('allpartners', [UserController::class, 'AllPartnerList']);
     Route::get('allemployeeType', [UserController::class, 'allemployeeType']);
     Route::get('employeeRow/{id}', [UserController::class, 'employeeRow']);
     Route::get('getEmployeeList', [UserController::class, 'getEmployeeList']);
@@ -101,7 +102,7 @@ Route::group([
     Route::post('changeMobileNumPartner', [UserController::class, 'changeMobileNumPartner']);
     Route::post('changeEmailPartner', [UserController::class, 'changeEmailPartner']);
     Route::post('cancelAccount', [UserController::class, 'cancelAccount']);
-    
+
     Route::post('saveUser', [UserController::class, 'saveUser']);
     Route::post('updateUser', [UserController::class, 'updateUser']);
     Route::post('updateUserProfileImg', [UserController::class, 'updateUserProfileImg']);
@@ -126,6 +127,7 @@ Route::group([
     'prefix' => 'category'
 ], function () {
     Route::post('save', [CategoryController::class, 'save']);
+    Route::post('edit', [CategoryController::class, 'edit']);
     Route::post('saveAttribute', [CategoryController::class, 'saveAttribute']);
     Route::post('saveAttributeVal', [CategoryController::class, 'saveAttributeVal']);
     Route::get('getCategoryList', [CategoryController::class, 'allCategory']);
@@ -140,6 +142,7 @@ Route::group([
     Route::get('attributes', [CategoryController::class, 'getAttribute']);
     Route::get('attributes-list', [CategoryController::class, 'getAttributeList']);
     Route::get('attributes-val-list', [CategoryController::class, 'getAttributeValList']);
+    Route::get('postCategorysearch', [CategoryController::class, 'postCategorysearch']);
 });
 
 Route::group([
@@ -183,6 +186,19 @@ Route::group([
     Route::get('deleteCategory', [DropShiProductController::class, 'deleteCategory']);
     Route::get('getVarientHistory', [DropShiProductController::class, 'getVarientHistory']);
     Route::get('removeProducts/{id}', [DropShiProductController::class, 'removeProducts']);
+});
+
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'post'
+], function () {
+
+    Route::post('save', [PostController::class, 'save']);
+    Route::post('update', [PostController::class, 'update']);
+    Route::get('postrow/{id}', [PostController::class, 'postrow']);
+    Route::get('allPost', [PostController::class, 'allPostList']);
+    Route::get('postCategoryData', [PostController::class, 'postCategoryData']);
 });
 
 
@@ -296,7 +312,7 @@ Route::group([
     Route::get('getPayItemList', [SettingController::class, 'getPayItemList']);
     Route::get('checkPayItemRow/{id}', [SettingController::class, 'checkPayItemRow']);
     Route::get('slidersImages', [SettingController::class, 'slidersImages']);
-     //add slider 
+    //add slider 
     Route::post('insertSlider', [SettingController::class, 'insertSlider']);
     Route::post('upateSetting', [SettingController::class, 'upateSetting']);
     Route::get('slidersImages', [SettingController::class, 'slidersImages']);

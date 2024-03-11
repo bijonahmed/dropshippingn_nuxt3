@@ -135,8 +135,9 @@ class UserController extends Controller
         }
         return response()->json($response, 200);
     }
-    public function AllUsersList(Request $request)
-    {
+
+
+    public function AllPartnerList(Request $request){
 
         $page = $request->input('page', 1);
         $pageSize = $request->input('pageSize', 10);
@@ -147,7 +148,7 @@ class UserController extends Controller
         // dd($selectedFilter);
         $query = User::orderBy('users.id', 'desc')
             ->join('rule', 'users.role_id', '=', 'rule.id')
-            ->select('users.id', 'users.name', 'users.email', 'users.phone_number', 'users.show_password', 'users.status', 'rule.name as rulename');
+            ->select('users.ref_id','users.inviteCode','users.register_ip','users.lastlogin_country','users.lastlogin_ip','users.created_at','users.role_id','users.id', 'users.id as userid', 'users.name', 'users.email', 'users.phone_number', 'users.show_password', 'users.status', 'rule.name as rulename');
         if ($searchQuery !== null) {
             $query->where('users.name', 'like', '%' . $searchQuery . '%');
         }
@@ -156,7 +157,93 @@ class UserController extends Controller
 
             $query->where('users.status', $selectedFilter);
         }
+        $query->whereNotIn('users.role_id', [1]);
+        $paginator = $query->paginate($pageSize, ['*'], 'page', $page);
 
+            $modifiedCollection = $paginator->getCollection()->map(function ($item) {
+
+            $lastDeposit            = 100;
+            $totalDeposit           = 120;
+            $totalreward            = 5;
+            $lastWithdraw           = 20;
+            $total_withdraw         = 21;
+            $totalexpance           = 30;
+            $runningNumberofOrder   = 5;
+            $orderAmount            = 75;
+            $total_profit           = 10;
+            $formula_result_1 = $totalDeposit + $totalreward + $total_profit;
+            $formula_result_2 = $total_withdraw + $totalexpance + $orderAmount;
+            $result           = $formula_result_1 - $formula_result_2;
+            $refby            = User::where('id',$item->ref_id)->first();
+            //$status  = 'Active';
+            return [
+                'id'            => $item->id,
+                'userid'        => $item->userid,
+                'name'          => substr($item->name, 0, 250),
+                'rulename'      => substr($item->rulename, 0, 250),
+                'email'         => $item->email,
+                'created_at'    => date("d/m/Y H:i:s",strtotime($item->created_at)),
+                'phone_number'  => $item->phone_number,
+                'show_password' => $item->show_password,
+                'lastDeposit'   => $lastDeposit,
+                'totalDeposit'  => $totalDeposit,
+                'reward'        => $totalreward,
+                'lastWithdraw'  => $lastWithdraw,
+                'total_withdraw'=> $total_withdraw,
+                'expance'       => $totalexpance,
+                'balance'       => $result,
+                'run_order'     => $runningNumberofOrder,
+                'orderAmount'   => $orderAmount,
+                'total_profit'  => $total_profit,
+                'lastloginIp'   => $item->lastlogin_ip,
+                'lastloginCountry' => $item->lastlogin_country,
+                'register_ip'   => $item->register_ip,
+                'inviteCode'    => $item->inviteCode,
+                'name'          => $item->name,
+                'refby'         => !empty($refby) ? $refby->name : "",
+                'status'        => $item->status == 1 ? 'Active' : 'Inactive' ,
+            ];
+        });
+
+
+
+        // Return the modified collection along with pagination metadata
+        return response()->json([
+            'data' => $modifiedCollection,
+            'current_page' => $paginator->currentPage(),
+            'total_pages' => $paginator->lastPage(),
+            'total_records' => $paginator->total(),
+        ], 200);
+
+
+
+    }
+
+
+
+    public function AllUsersList(Request $request)
+    {
+
+        
+        $page = $request->input('page', 1);
+        $pageSize = $request->input('pageSize', 10);
+
+        // Get search query from the request
+        $searchQuery    = $request->searchQuery;
+        $selectedFilter = (int)$request->selectedFilter;
+        // dd($selectedFilter);
+        $query = User::orderBy('users.id', 'desc')
+            ->join('rule', 'users.role_id', '=', 'rule.id')
+            ->select('users.role_id','users.id', 'users.name', 'users.email', 'users.phone_number', 'users.show_password', 'users.status', 'rule.name as rulename');
+        if ($searchQuery !== null) {
+            $query->where('users.name', 'like', '%' . $searchQuery . '%');
+        }
+
+        if ($selectedFilter !== null) {
+
+            $query->where('users.status', $selectedFilter);
+        }
+        $query->whereNotIn('users.role_id', [2]);
         $paginator = $query->paginate($pageSize, ['*'], 'page', $page);
 
         $modifiedCollection = $paginator->getCollection()->map(function ($item) {
@@ -171,6 +258,8 @@ class UserController extends Controller
             ];
         });
 
+
+
         // Return the modified collection along with pagination metadata
         return response()->json([
             'data' => $modifiedCollection,
@@ -179,19 +268,7 @@ class UserController extends Controller
             'total_records' => $paginator->total(),
         ], 200);
 
-        // try {
-        //     $rows = User::allUseers($request->all());
-        //     $response = [
-        //         'data' => $rows,
-        //         'message' => 'success'
-        //     ];
-        // } catch (\Throwable $th) {
-        //     $response = [
-        //         'data' => [],
-        //         'message' => 'failed'
-        //     ];
-        // }
-        //return response()->json($response, 200);
+        
     }
 
     public function allemployeeType(Request $request)

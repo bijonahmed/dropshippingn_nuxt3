@@ -23,6 +23,7 @@ class Categorys extends Authenticatable
     'meta_keyword',
     'parent_id',
     'file',
+    'bg_images',
     'keyword',
     'sort_order',
     'status',

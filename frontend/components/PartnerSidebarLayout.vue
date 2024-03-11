@@ -1,4 +1,3 @@
- 
 <template>
     <div>
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -194,26 +193,26 @@
             <!-- /.sidebar -->
         </aside>
 
-<!-- logout modal  -->
-<div class="logout modal_">
-        <div class="mdal_content">
-            <div class="m_head">
-                <h6>Logout</h6>
-                <div class="w-50"></div>
-                <button class="bt_close" @click="logoutModalClose">
-                    <i class="fa-solid fa-x"></i>
-                </button>
-            </div>
-            <div class="_body">
-                <div class="form_group">
+        <!-- logout modal  -->
+        <div class="logout modal_">
+            <div class="mdal_content">
+                <div class="m_head">
+                    <h6>Logout</h6>
+                    <div class="w-50"></div>
+                    <button class="bt_close" @click="logoutModalClose">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                </div>
+                <div class="_body">
+                    <div class="form_group">
 
-                    <button class="btn btn-primary mr-2 btn-block" @click="logout">Yes</button>
-                    <button class="btn btn-secondary btn-block" @click="logoutModalClose">No</button>
+                        <button class="btn btn-primary mr-2 btn-block" @click="logout">Yes</button>
+                        <button class="btn btn-secondary btn-block" @click="logoutModalClose">No</button>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
@@ -221,7 +220,7 @@
 
 
     </div>
-</template> 
+</template>
 
 <script setup>
 // Import ref and define reactive variable for sidebar state
@@ -231,13 +230,13 @@ import { storeToRefs } from 'pinia';
 import { useCartStore } from '~~/stores/cart';
 const userStore = useUserStore();
 const {
-	isLoggedIn
+    isLoggedIn
 } = storeToRefs(userStore)
 const cartStore = useCartStore()
 computed(async () => {
-	try {
-		await userStore.getUser()
-	} catch (error) { }
+    try {
+        await userStore.getUser()
+    } catch (error) { }
 })
 const isSidebarOpen = ref(false);
 
@@ -268,32 +267,32 @@ const closeSidebar = () => {
     isSidebarOpen.value = false;
 };
 const logout = async () => {
-  const router = useRouter(); // Get the router object
-  //let res = confirm('Are you sure you want to sign out?');
-  try {
-      await userStore.logout();
-      localStorage.removeItem('token');
-      router.push('/'); // Redirect to the root route
-      return;
-    
-  } catch (error) {
-    console.error(error);
-  }
+    const router = useRouter(); // Get the router object
+    //let res = confirm('Are you sure you want to sign out?');
+    try {
+        await userStore.logout();
+        localStorage.removeItem('token');
+        router.push('/'); // Redirect to the root route
+        return;
+
+    } catch (error) {
+        console.error(error);
+    }
 };
 </script>
 
 <style scoped>
 .sidebar {
-	/* width: 270px; */
-	/* background: var(--primaryColor); */
-	/* padding: 20px; */
-	height: 85vh;
-	overflow: auto;
-	/* position: fixed; */
-	/* left: 0; */
-	/* top: 0; */
-	scrollbar-width: 0;
-	/* transition: .4s all ease-in-out; */
-	/* z-index: 99999; */
+    /* width: 270px; */
+    /* background: var(--primaryColor); */
+    /* padding: 20px; */
+    height: 85vh;
+    overflow: auto;
+    /* position: fixed; */
+    /* left: 0; */
+    /* top: 0; */
+    scrollbar-width: 0;
+    /* transition: .4s all ease-in-out; */
+    /* z-index: 99999; */
 }
 </style>

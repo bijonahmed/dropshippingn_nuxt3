@@ -23,6 +23,7 @@ class User extends Authenticatable implements JWTSubject
     'doc_file',
     'telegram',
     'whtsapp',
+    'register_ip',
     'othersway_connect',
     'password',
     'with_password',

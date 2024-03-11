@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   //ssr: true,
   runtimeConfig: {
     public: {
-      baseURL: process.env.NODE_ENV === "production" ? "https://api.astute360corp.com/api/" : "http://127.0.0.1:8000/api/",
+      baseURL: process.env.NODE_ENV === "production" ? "https://dropshippingapi.futuregenit.com/api/" : "http://127.0.0.1:8000/api/",
     },
   },
   pages: true,

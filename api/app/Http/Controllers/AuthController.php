@@ -29,11 +29,11 @@ class AuthController extends Controller
         ]);
 
         // Validate CAPTCHA
-    if (strtolower($request->input('captchaInput')) !== strtolower($request->input('userCapInput'))) {
-        throw ValidationException::withMessages([
-            'userCapInput' => ['The CAPTCHA code is incorrect.'],
-        ]);
-    }
+        if (strtolower($request->input('captchaInput')) !== strtolower($request->input('userCapInput'))) {
+            throw ValidationException::withMessages([
+                'userCapInput' => ['The CAPTCHA code is incorrect.'],
+            ]);
+        }
     }
     /*
     public function login(Request $request)
@@ -57,10 +57,10 @@ class AuthController extends Controller
     {
         // Validate the request
         $this->validateLogin($request);
-    
+
         // Retrieve credentials from the request
         $credentials = request(['email', 'password']);
-    
+
         // Attempt authentication
         if (!$token = auth('api')->attempt($credentials)) {
             // If authentication fails, return an error response
@@ -72,9 +72,25 @@ class AuthController extends Controller
                 ]
             ], 422);
         }
-    
+
         // Check if the user is active
         $user = auth('api')->user();
+
+        if (!empty($user)) {
+            if ($user->status === 1) {
+                $ipAddress = $request->ip(); //'5.193.226.195'; Testing ip Dubai
+                $country = $this->getCountryFromIp($ipAddress);
+                $data = [
+                    'lastlogin_ip' => $ipAddress,
+                    'lastlogin_country' => $country,
+                    'lastlogin_datetime' => now()->format('Y-m-d H:i:s'),
+                ];
+                // Update the user table for the given user ID
+                User::where('id', $user->id)->update($data);
+            }
+        }
+
+
         if ($user->status === 0) {
             // If the user is not active, return an error response
             return response()->json([
@@ -85,24 +101,47 @@ class AuthController extends Controller
                 ]
             ], 403);
         }
-    
+
         // If authentication is successful and user is active, return token
         return $this->respondWithToken($token);
     }
-    
+
+
+
+
+    private function getCountryFromIp($ip)
+    {
+        //$ip = '5.193.226.195'; for testing dubai IP
+
+        $ipdat = @json_decode(file_get_contents(
+            "http://www.geoplugin.net/json.gp?ip=" . $ip
+        ));
+
+        $CountryName    = $ipdat->geoplugin_countryName;
+        //$CountryName    = $ipdat->geoplugin_countryName . "\n"; 
+        $CityName       = $ipdat->geoplugin_city . "\n";
+        $ContinentName  = $ipdat->geoplugin_continentName . "\n";
+        $Latitude       = $ipdat->geoplugin_latitude . "\n";
+        $Longitude      = $ipdat->geoplugin_longitude . "\n";
+        $CurrencySymbol = $ipdat->geoplugin_currencySymbol . "\n";
+        $CurrencyCode   = $ipdat->geoplugin_currencyCode . "\n";
+        $Timezone       = $ipdat->geoplugin_timezone;
+
+        $location = "$CountryName";
+        //$location = "Country: $CountryName, City: $CityName, Continent: $ContinentName, Latitude: $Latitude, Longitude: $Longitude, Currency Symbol: $CurrencySymbol, Currency Code: $CurrencyCode, Timezone: $Timezone";
+        return $location;
+    }
+
 
     public function generateUniqueRandomNumber()
     {
         $microtime = microtime(true); // Get the current microtime as a float
         $microtimeString = str_replace('.', '', (string)$microtime); // Remove the dot from microtime
-        
+
         // Extract the last 5 digits
         $uniqueId = substr($microtimeString, -7);
         return $uniqueId; // Since we're generating only one number, return the first (and only) element of the array
     }
-
-
-
 
     public function register(Request $request)
     {
@@ -140,6 +179,7 @@ class AuthController extends Controller
             'email'         => $request->email,
             'role_id'       => 2,
             'ref_id'        => $user->id,
+            'register_ip'   => $request->ip(),
             'inviteCode'    => $this->generateUniqueRandomNumber(),
             'show_password' => $request->password,
             'password'      => bcrypt($request->password),
@@ -172,14 +212,12 @@ class AuthController extends Controller
 
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'token_type'   => 'bearer',
+            'expires_in'    => auth('api')->factory()->getTTL() * 60,
             'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
+                'id'    => $user->id,
+                'name'  => $user->name,
                 'email' => $user->email,
-
-
                 // Add any other user information you want to include
             ],
         ]);
@@ -212,7 +250,7 @@ class AuthController extends Controller
     }
 
 
-public function updateUserProfileSocial(Request $request)
+    public function updateUserProfileSocial(Request $request)
     {
         $user = auth('api')->user();
         $authId = $user->id;
@@ -222,7 +260,7 @@ public function updateUserProfileSocial(Request $request)
         $validator = Validator::make($request->all(), [
             'telegram' => 'required',
             'whtsapp'  => 'required',
-          
+
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
@@ -244,7 +282,7 @@ public function updateUserProfileSocial(Request $request)
         return response()->json($response);
     }
 
-    
+
     public function updateprofile(Request $request)
     {
         $user = auth('api')->user();
@@ -298,10 +336,10 @@ public function updateUserProfileSocial(Request $request)
             'data'    => $data,
             'rname'   => !empty($role_name) ? $role_name->name : "",
             'dataImg' => !empty($data->image) ? url($data->image) : "",
-            'doc_file'=> !empty($data->doc_file) ? url($data->doc_file) : "",
+            'doc_file' => !empty($data->doc_file) ? url($data->doc_file) : "",
             'othersway_connect' => !empty($data->othersway_connect) ? $data->othersway_connect : "",
-            'created_at'        => date("Y-m-d",strtotime($data->created_at)),
-            'updated_at'        => date("Y-m-d",strtotime($data->updated_at)),
+            'created_at'        => date("Y-m-d", strtotime($data->created_at)),
+            'updated_at'        => date("Y-m-d", strtotime($data->updated_at)),
             'message'           => 'User Profile Data'
         ]);
     }

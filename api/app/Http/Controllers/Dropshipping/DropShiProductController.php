@@ -111,7 +111,7 @@ class DropShiProductController extends Controller
 
     public function save(Request $request)
     {
-     //dd($request->all());
+        //dd($request->all());
         $validator = Validator::make($request->all(), [
             'name'           => 'required',
             'category'       => 'required',
@@ -166,7 +166,7 @@ class DropShiProductController extends Controller
             //INSERT MULTIPLE CATEGORY
             $category     = $request->category;
             $dynamicArray = explode(',', $category); // Convert the string to an array
-           //dd($dynamicArray);
+            //dd($dynamicArray);
             $results      = Categorys::whereIn('id', $dynamicArray)->get();
             //dd($results);
             $formattedResults = [];
@@ -189,7 +189,7 @@ class DropShiProductController extends Controller
         }
     }
 
-     
+
 
     function generateUnique4DigitNumber($existingNumbers = [])
     {
@@ -200,8 +200,8 @@ class DropShiProductController extends Controller
         return $uniqueNumber;
     }
 
-    
-    
+
+
 
     public function additionaIMagesDelete(Request $request)
     {
@@ -216,7 +216,7 @@ class DropShiProductController extends Controller
         // dd($request->all());
         $dynamicArray = explode(',', $request->item); // Convert the string to an array
         $lastElement  = trim(end($dynamicArray));
-     
+
         $category_id  = Categorys::where('name', $lastElement)->select('id')->first();
         $row          = ProductCategory::where('category_id', $category_id->id)->where('product_id', $request->product_id)->first();
         if (!empty($row->category_id)) {
@@ -246,9 +246,7 @@ class DropShiProductController extends Controller
         foreach ($returnData as $inner_array) {
             foreach ($inner_array as $obj) {
 
-                $concatenated_names[] =$obj->name;
-
-               
+                $concatenated_names[] = $obj->name;
             }
         }
         $resulting_string = implode("<br/>", $concatenated_names);
@@ -275,7 +273,7 @@ class DropShiProductController extends Controller
         $selectedFilter = (int)$request->selectedFilter;
         // dd($selectedFilter);
         $query = Product::orderBy('id', 'desc');
-        
+
         if ($searchQuery !== null) {
             $query->where('name', 'like', '%' . $searchQuery . '%');
         }

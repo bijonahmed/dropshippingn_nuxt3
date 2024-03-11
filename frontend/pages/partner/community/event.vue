@@ -29,105 +29,12 @@
                             <div class="col-md-12">
                                 <!-- content part start here  -->
                                 <div class="s_content">
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
-                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
-                                    <h6>Online recharge:</h6>
-                                    <p>Enter the amount - select the payment method - obtain the payment QR code and pay
-                                        using
-                                        the payment application - please pay within the specified time (within 30
-                                        minutes) -
-                                        payment is completed - wait for the system to automatically confirm. It is
-                                        prohibited to
-                                        reuse QR codes for payment, and a new payment code must be obtained for each
-                                        recharge.
-                                    </p>
+                                    <div v-for="(post, index) in postdata" :key="index">
+                                        <img :src="post.images" class="img-fluid" loading="lazy" alt="">
+                                        <h6>{{ post.name }}:</h6>
+                                        <p>{{ post.description_full }}</p>
+                                    </div>
+
                                 </div>
                                 <!-- content part end here  -->
                             </div>
@@ -143,7 +50,34 @@
 </template>
 
 <script setup>
+import { ref, reactive, onMounted } from 'vue';
+import axios from 'axios';
+import swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 definePageMeta({
     middleware: 'is-logged-out',
 })
+
+const postdata = ref([]);
+const allPostCategory = async (postcatid) => {
+    try {
+        const response = await axios.get(`/post/postCategoryData`, {
+            params: {
+                id: postcatid // Assuming 'searchParam' is the parameter you want to send
+            }
+        });
+        // console.log(response.data);
+        postdata.value = response.data.data;
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+onMounted(async () => {
+    allPostCategory(2);
+
+});
 </script>

@@ -64,12 +64,24 @@
 
                                             <ul>
                                                 <li v-for="category in categories" :key="category.id">
-                                                    <span class="badge bg-dark">{{ category.name }}&nbsp;[<span style="background-color: red; color:white;">{{ category.percentage_amt }}%</span>]&nbsp;<span @click="editCategory(category.id)"><i class="fas fa-edit"></i></span></span>
+                                                    <span class="badge bg-dark">{{ category.name }}
+                                                        
+                                                         <span v-if="category.percentage_amt" style="background-color: red; color:white;">
+                                                            [{{ category.percentage_amt }}%]
+                                                        </span>
+                                                        
+                                                            
+                                                            <span @click="editCategory(category.id)"><i class="fas fa-edit"></i></span></span>
                                                     <ul v-if="category.children && category.children.length">
                                                         <template v-for="childLevel1 in category.children"
                                                             :key="childLevel1.id">
                                                             <li>
-                                                                <span class="badge bg-secondary">{{ childLevel1.name }}&nbsp;<span @click="editCategory(childLevel1.id)"><i class="fas fa-edit"></i></span></span>
+                                                                <span class="badge bg-secondary">{{ childLevel1.name }}&nbsp;
+                                                                    <span v-if="childLevel1.percentage_amt" style="background-color: red; color:white;">
+                                                            [{{ childLevel1.percentage_amt }}%]
+                                                        </span>
+
+                                                                    <span @click="editCategory(childLevel1.id)"><i class="fas fa-edit"></i></span></span>
                                                                 <ul
                                                                     v-if="childLevel1.children && childLevel1.children.length">
                                                                     <template v-for="childLevel2 in childLevel1.children"

@@ -81,11 +81,13 @@
                             Description</label>
                           <div class="col-sm-10">
                             <textarea name="meta_description" rows="5" placeholder="Meta Tag Description"
-                              v-model="insertdata.meta_description" id="meta_description" class="form-control"></textarea>
+                              v-model="insertdata.meta_description" id="meta_description"
+                              class="form-control"></textarea>
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label for="input-meta-description-1" class="col-sm-2 col-form-label">Meta Tag Keywords</label>
+                          <label for="input-meta-description-1" class="col-sm-2 col-form-label">Meta Tag
+                            Keywords</label>
                           <div class="col-sm-10">
                             <textarea name="meta_keyword" rows="5" id="meta_keyword" class="form-control"
                               v-model="insertdata.meta_keyword"
@@ -110,22 +112,34 @@
                           </div>
                         </div>
                         <div class="row mb-3">
-                          <label for="input-meta-description-1" class="col-sm-2 col-form-label">Icon (393x491px)</label>
+                          <label for="input-meta-description-1" class="col-sm-2 col-form-label">Logo</label>
                           <div class="col-sm-10">
-                            <input class="form-control form-control-sm" id="file" ref="file" @change="onFileSelected"
-                              type="file">
+
+                            <input type="file" value class="form-control" id="fileInput" accept="image/png,image/jpeg"
+                              ref="files" @change="onFileSelected" />
                             <!-- <a href="https://icons8.com/" target="_blank">https://icons8.com/</a> -->
                           </div>
                         </div>
 
+                        <div class="row mb-3">
+                          <label for="input-meta-description-1" class="col-sm-2 col-form-label">BG Images</label>
+                          <div class="col-sm-10">
+
+                            <input type="file" value class="form-control" id="fileInput_1" accept="image/png,image/jpeg"
+                              ref="files" @change="onFileSelected_1" />
+                            <!-- <a href="https://icons8.com/" target="_blank">https://icons8.com/</a> -->
+                          </div>
+                        </div>
 
                         <div class="row mb-3">
-                            <label for="input-meta-description-1" class="col-sm-2 col-form-label">Percentage Amount</label>
-                            <div class="col-sm-10">
-                             
-                              <input type="text" name="percentage_amt" placeholder="%" v-model="insertdata.percentage_amt" class="form-control" />
-                            </div>
+                          <label for="input-meta-description-1" class="col-sm-2 col-form-label">Percentage
+                            Amount</label>
+                          <div class="col-sm-10">
+
+                            <input type="text" name="percentage_amt" placeholder="%" v-model="insertdata.percentage_amt"
+                              class="form-control" />
                           </div>
+                        </div>
 
                         <div class="row mb-3 d-none">
                           <label for="input-meta-description-1" class="col-sm-2 col-form-label">For Mobile View</label>
@@ -138,8 +152,8 @@
                         <div class="row mb-3">
                           <label for="input-meta-description-1" class="col-sm-2 col-form-label">Status</label>
                           <div class="col-sm-10">
-                            <select class="form-control form-select-sm" aria-label=".form-select-sm example" name="status"
-                              id="status">
+                            <select class="form-control form-select-sm" aria-label=".form-select-sm example"
+                              name="status" id="status">
                               <option selected value="1">Active</option>
                               <option value="0">Inactive</option>
                             </select>
@@ -182,8 +196,6 @@
   </div>
 </template>
 
-
-
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import axios from 'axios';
@@ -192,12 +204,14 @@ import swal from 'sweetalert2';
 window.Swal = swal;
 
 definePageMeta({
-    middleware: 'is-logged-out',
-    title: 'Profile' // Set your desired page title here
+  middleware: 'is-logged-out',
+  title: 'Profile' // Set your desired page title here
 
 })
 
+const previewUrl = ref(null);
 const file = ref(null);
+const bg_images = ref(null);
 const insertdata = reactive({
   id: '',
   name: '',
@@ -215,6 +229,7 @@ const insertdata = reactive({
 const categories = ref([]);
 const errors = ref({});
 const notifmsg = ref('');
+const files = ref(null);
 const router = useRouter();
 
 const fetchDataParent = async () => {
@@ -226,8 +241,43 @@ const fetchDataParent = async () => {
   }
 };
 
-const onFileSelected = () => {
-  file.value = document.querySelector('input[type="file"]').files[0];
+const onFileSelected = (event) => {
+  previewImage(event)
+  file.value = event.target.files[0];
+};
+
+const onFileSelected_1 = (event) => {
+  previewImage_bg(event);
+  bg_images.value = event.target.files[0];
+};
+
+const checkImageDimensionsThunbnail = (file) => {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.src = e.target.result;
+    img.onload = () => {
+      //if (img.width === 300 && img.height === 300) {
+      previewUrl.value = e.target.result;
+      // } else {
+      //   alert('Image dimensions must be 300x300 pixels.');
+      //}
+    };
+  };
+  reader.readAsDataURL(file);
+  //resetInput();
+};
+
+const previewImage = (event) => {
+  const file = event.target.files[0];
+  previewUrl.value = URL.createObjectURL(file);
+  checkImageDimensionsThunbnail(file);
+};
+
+const previewImage_bg = (event) => {
+  const file = event.target.files[0];
+  previewUrl.value = URL.createObjectURL(file);
+  checkImageDimensionsThunbnail(file);
 };
 
 
@@ -238,7 +288,12 @@ onMounted(async () => {
 
 const saveData = () => {
   const formData = new FormData();
+  //console.log(bg_images.value);
+  //console.log(file.value);
+
+  //return false;
   formData.append('file', file.value);
+  formData.append('bg_images', bg_images.value);
   formData.append('id', insertdata.id);
   formData.append('name', insertdata.name);
   formData.append('mobile_view_class', insertdata.mobile_view_class);
@@ -287,7 +342,6 @@ const success_noti = () => {
 };
 
 </script>
- 
 
 <style scoped>
 .required-label::after {
@@ -362,4 +416,3 @@ input[type="checkbox"] {
   width: 50px;
 }
 </style>
-  

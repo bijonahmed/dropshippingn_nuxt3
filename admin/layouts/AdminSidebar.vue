@@ -95,7 +95,8 @@ const menuItems = ref([
 		route: null,
 		children: [
 			{ label: 'User Role', icon: 'fa-circle', route: '/user/rule-list' },
-			{ label: 'User List', icon: 'fa-circle', route: '/user/user-list' }
+			{ label: 'System User List', icon: 'fa-circle', route: '/user/user-list' },
+			{ label: 'Partner List', icon: 'fa-circle', route: '/user/partner-list' }
 		]
 	},
 	{
@@ -110,6 +111,19 @@ const menuItems = ref([
 			{ label: 'Brands', icon: 'fa-circle', route: '/brand/list' },
 			{ label: 'Sliders', icon: 'fa-circle', route: '/slider/list' },
 			{ label: 'Pre-Setting', icon: 'fa-circle', route: '/setting/presetting' }
+		]
+	}
+	,
+	{
+		label: 'Post Management',
+		icon: 'fa-folder',
+		badge: '',
+		open: false,
+		route: null,
+		children: [
+		    { label: 'Add Post', icon: 'fa-circle', route: '/post/add' },
+			{ label: 'Post List', icon: 'fa-circle', route: '/post/list' },
+			
 		]
 	}
 ]);

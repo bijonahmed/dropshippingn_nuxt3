@@ -12,6 +12,7 @@ use App\Models\Categorys;
 use App\Category;
 use App\Models\AttributeValues;
 use App\Models\Attribute;
+use App\Models\PostCategory;
 use App\Models\SubAttribute;
 use App\Models\ProductAttributes;
 use App\Models\ProductAttributeValue;
@@ -132,27 +133,40 @@ class CategoryController extends Controller
         ];
         return response()->json($response);
     }
+
+
+
     public function save(Request $request)
     {
-       // dd($request->all());
-        ///exit; 
-        if (empty($request->id)) {
-            $validator = Validator::make(
-                $request->all(),
-                [
-                    'name'      => 'required|unique:categorys,name',
-                    'status'    => 'required',
-                ],
-                [
-                    //'name'   => 'Category name is required',
-                    'status' => 'Status is required',
-                ]
-            );
-            if ($validator->fails()) {
-                return response()->json(['errors' => $validator->errors()], 422);
-            }
+        //dd($request->all());
+        $validator = Validator::make(
+            $request->all(),
+            [
+                //  'name'      => 'required|unique:categorys,name',
+                'status'    => 'required',
+            ],
+            [
+                //'name'   => 'Category name is required',
+                'status' => 'Status is required',
+            ]
+        );
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
         }
-        // Upload image
+        $slug     = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->input('name'))));
+        $data = array(
+            'name'                      => $request->name,
+            'slug'                      => $slug,
+            'percentage_amt'            => !empty($request->percentage_amt) ? $request->percentage_amt : "",
+            'description'               => !empty($request->description) ? $request->description : "",
+            'meta_title'                => !empty($request->meta_title) ? $request->meta_title : "",
+            'meta_description'          => !empty($request->meta_description) ? $request->meta_description : "",
+            'meta_keyword'              => !empty($request->meta_keyword) ? $request->meta_keyword : "",
+            'parent_id'                 => !empty($request->parent_id) ? $request->parent_id : "",
+            'status'                    => !empty($request->status) ? $request->status : "",
+            'keyword'                   => !empty($request->keyword) ? $request->keyword : "",
+        );
+
         if (!empty($request->file('file'))) {
             $files = $request->file('file');
             $fileName = Str::random(20);
@@ -162,58 +176,81 @@ class CategoryController extends Controller
             $upload_url = $uploadPath . $path;
             $files->move(public_path('/backend/files/'), $upload_url);
             $file_url = $uploadPath . $path;
-            $imagePath = $file_url;
+            $data['file'] = $file_url;
             //$data['file'] = $file_url;
-        } else {
-            $imagePath = "";
         }
-        $slug     = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->input('name'))));
-        if (empty($request->id)) {
-            // Save to database
-            Categorys::create([
-                'name'              => $request->input('name'),
-                'slug'              => $slug,
-                'percentage_amt'    => $request->input('percentage_amt'),
-                'description'       => $request->input('description'),
-                'meta_title'        => $request->input('meta_title'),
-                'meta_description'  => $request->input('meta_description'),
-                'meta_keyword'      => $request->input('meta_keyword'),
-                'parent_id'         => $request->input('parent_id') ? $request->input('parent_id') : 0,
-                'status'            => $request->input('status'),
-                'keyword'           => $request->input('keyword'),
-                'mobile_view_class' => $request->input('mobile_view_class'),
-                'file'              => $imagePath,
-            ]);
-        } else {
-            $data = Categorys::find($request->id);
-            if (!empty($request->file('file'))) {
-                $files = $request->file('file');
-                $fileName = Str::random(20);
-                $ext = strtolower($files->getClientOriginalExtension());
-                $path = $fileName . '.' . $ext;
-                $uploadPath = '/backend/files/';
-                $upload_url = $uploadPath . $path;
-                $files->move(public_path('/backend/files/'), $upload_url);
-                $file_url = $uploadPath . $path;
-                $imagePath = $file_url;
-            } else {
-                $imagePath =  $data->file;
-            }
-            // 'percentage_amt'    => $request->input('percentage_amt'),
-            $data->name              =  $request->input('name');
-            $data->slug              =  $slug;
-            $data->description       =  $request->input('description');
-            $data->meta_title        =  $request->input('meta_title');
-            $data->meta_description  =  $request->input('meta_description');
-            $data->percentage_amt    =  $request->input('percentage_amt');
 
-            $data->meta_keyword      =  $request->input('meta_keyword');
-            $data->parent_id         =  $request->input('parent_id');
-            $data->status            =  $request->input('status');
-            $data->keyword           =  $request->input('keyword');
-            $data->mobile_view_class =  $request->input('mobile_view_class');
-            $data->save();
+
+        if (!empty($request->file('bg_images'))) {
+            $files = $request->file('bg_images');
+            $fileName = Str::random(20);
+            $ext = strtolower($files->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $files->move(public_path('/backend/files/'), $upload_url);
+            $file_url = $uploadPath . $path;
+            $data['bg_images'] = $file_url;
+            //$data['file'] = $file_url;
         }
+        // dd($data);
+        Categorys::create($data);
+        $response = [
+            'message' => 'Successfully insert',
+        ];
+        return response()->json($response);
+    }
+
+
+    public function edit(Request $request)
+    {
+        // dd($request->all());
+
+        $slug     = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->input('name'))));
+        // Save to database
+
+        $data = array(
+            'name'                      => $request->name,
+            'slug'                      => $slug,
+            'percentage_amt'            => !empty($request->percentage_amt) ? $request->percentage_amt : "",
+            'description'               => !empty($request->description) ? $request->description : "",
+            'meta_title'                => !empty($request->meta_title) ? $request->meta_title : "",
+            'meta_description'          => !empty($request->meta_description) ? $request->meta_description : "",
+            'meta_keyword'              => !empty($request->meta_keyword) ? $request->meta_keyword : "",
+            'parent_id'                 => !empty($request->parent_id) ? $request->parent_id : "",
+            'status'                    => !empty($request->status) ? $request->status : "",
+            'keyword'                   => !empty($request->keyword) ? $request->keyword : "",
+        );
+        if (!empty($request->file('file'))) {
+            $files = $request->file('file');
+            $fileName = Str::random(20);
+            $ext = strtolower($files->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $files->move(public_path('/backend/files/'), $upload_url);
+            $file_url = $uploadPath . $path;
+            $data['file'] = $file_url;
+            //$data['file'] = $file_url;
+        }
+
+
+        if (!empty($request->file('bg_images'))) {
+            $files = $request->file('bg_images');
+            $fileName = Str::random(20);
+            $ext = strtolower($files->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $files->move(public_path('/backend/files/'), $upload_url);
+            $file_url = $uploadPath . $path;
+            $data['bg_images'] = $file_url;
+            //$data['file'] = $file_url;
+        }
+        // dd($data); bg_images
+
+        Categorys::where('id', $request->id)->update($data);
+
         $response = [
             'message' => 'Successfull',
         ];
@@ -245,6 +282,14 @@ class CategoryController extends Controller
         $attribute = Attribute::where('status', 1)->get();
         return response()->json($attribute);
     }
+
+    public function postCategorysearch()
+    {
+        $data = PostCategory::where('status', 1)->get();
+        return response()->json($data);
+    }
+
+
     public function getAttributeList(Request $request)
     {
         $attribute = Attribute::orderBy('name', 'asc')->get();
@@ -288,6 +333,8 @@ class CategoryController extends Controller
         $data = Categorys::find($id);
         $response = [
             'data' => $data,
+            'file' => url($data->file),
+            'bg_images' => url($data->bg_images),
             'message' => 'success'
         ];
         return response()->json($response, 200);
