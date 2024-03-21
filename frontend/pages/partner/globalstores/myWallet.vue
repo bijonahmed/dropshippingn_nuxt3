@@ -83,8 +83,10 @@
                                             </ul>
                                         </div>
                                         <div class="btn-group">
-                                            <button class="btn btn-outline-primary bt_depo">Deposite</button>
-                                            <a href="withdraw.html" class="btn btn-primary">Withdraw</a>
+                                            <button class="btn btn-outline-primary bt_depo"
+                                                @click="depositModal">Deposite</button>
+                                                <nuxt-link to="/partner/globalstores/withdraw" class="btn btn-primary">Withdraw</nuxt-link>
+                                           
                                         </div>
                                     </div>
                                     <!-- tabs part start here  -->
@@ -130,7 +132,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            <table class="table">
+                                            <table class="table" style="font-size: 12px;">
                                                 <thead>
                                                     <tr>
                                                         <th>Business Type </th>
@@ -166,38 +168,38 @@
                                                 <form action="">
                                                     <div class="d-flex align-items-center">
                                                         <input type="text" class="form-control w-50"
-                                                            placeholder="Recharge order id ">
-                                                        <button type="button"
-                                                            class="btn mx-1 btn-success ">Search</button>
+                                                            placeholder="Recharge order id" v-model="searchDOrderId">
+                                                        <button type="button" class="btn mx-1 btn-success"
+                                                            @click="depositList">Search</button>
                                                     </div>
                                                 </form>
                                             </div>
                                             <div class="table_section">
-                                                <table class="table">
+                                                <div class="loading-indicator" v-if="loading"
+                                                    style="text-align: center;">
+                                                    <Loader />
+                                                </div>
+                                                <table class="table" style="font-size: 12px;">
                                                     <thead>
                                                         <tr>
                                                             <th>Recharge Order Number </th>
                                                             <th>Deposite amount($)</th>
                                                             <th>Payment amount($)</th>
-                                                            <th>State</th>
                                                             <th>Payment method</th>
                                                             <th>Payment time</th>
                                                             <th>Creation time</th>
-                                                            <th>More </th>
-                                                            <th>Operation </th>
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>3546544654</td>
-                                                            <td>1324</td>
-                                                            <td></td>
-                                                            <td>Unpaid</td>
-                                                            <td>T1-brazil method</td>
-                                                            <td>24-01-29 12:00</td>
-                                                            <td>24-01-29 12:00</td>
-                                                            <td>see more</td>
-                                                            <td>Cosed</td>
+                                                        <tr v-for="item in depositArr" :key="item.id">
+                                                            <td>{{ item.depositID }}</td>
+                                                            <td>{{ item.deposit_amount }}</td>
+                                                            <td>{{ item.receivable_amount }}</td>
+                                                            <td>{{ item.payment_method }}</td>
+                                                            <td>{{ formatDate(item.created_at) }}</td>
+                                                            <td>{{ formatDate(item.created_at) }}</td>
+                                                            <td>{{ getStatus(item.status) }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -212,38 +214,46 @@
                                                         <form action="">
                                                             <div class="d-flex align-items-center">
                                                                 <input type="text" class="form-control w-10 me-1"
-                                                                    placeholder="Withdraw Order Id ">
-                                                                <select name="" id="" class="form-control w-10">
+                                                                    placeholder="Withdraw Order Id " v-model="searchWOrderId">
+                                                                <!-- <select name="" id="" class="form-control w-10">
                                                                     <option value="">Unpaid Payment</option>
                                                                     <option value="">Unpaid Payment</option>
-                                                                </select>
+                                                                </select> -->
                                                                 <button type="button"
-                                                                    class="btn mx-1 btn-success ">Search</button>
+                                                                    class="btn mx-1 btn-success" @click="withdrawalList">Search</button>
                                                             </div>
                                                         </form>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="table_section">
-                                                <table class="table">
+                                                <div class="loading-indicator" v-if="loading"
+                                                    style="text-align: center;">
+                                                    <Loader />
+                                                </div>
+                                                <table class="table" style="font-size: 12px;">
                                                     <thead>
                                                         <tr>
-                                                            <th>Withdrawal information </th>
-                                                            <th>Collection information</th>
-                                                            <th>Payment information</th>
-                                                            <th>remarks</th>
-                                                            <th>Application time </th>
-                                                            <th>More</th>
+                                                            <th>Order Number </th>
+                                                            <th>Withdrawal amount($)</th>
+                                                            <th>Transaction Fee</th>
+                                                            <th>Payable amount($)</th>
+                                                            <th>Payment method</th>
+                                                            <th>Payment time</th>
+                                                            <th>Creation time</th>
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th></th>
-                                                            <th></th>
-                                                            <th></th>
-                                                            <th></th>
-                                                            <th></th>
+                                                        <tr v-for="item in withdrawArr" :key="item.id">
+                                                            <td>{{ item.withdrawID }}</td>
+                                                            <td class="text-center">{{ item.withdraw_amount }}</td>
+                                                            <td class="text-center">{{ item.transection_fee }}%</td>
+                                                            <td class="text-center">{{ item.payable_amount }}</td>
+                                                            <td>{{ item.currency_type_name }}</td>
+                                                            <td>{{ formatDate(item.created_at) }}</td>
+                                                            <td>{{ formatDate(item.created_at) }}</td>
+                                                            <td>{{ getStatus(item.status) }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -261,13 +271,288 @@
             <!-- content section end here  -->
             <PartnerFooterLayout />
         </div>
+        <!-- Start Modal  -->
+        <!-- modal  -->
+        <div class="depo_modal modal_">
+            <div class="mdal_content">
+                <div class="m_head">
+                    <h6>Deposite Modal</h6>
+                    <button class="bt_close" @click="depositModalCls">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                </div>
+                <div class="_body">
+                    <div class="form_group">
+                        <input type="text" class="form-control rounded-0" placeholder="Deposite amount"
+                            v-model="walletData.depsoitAmount" @keyup="validateInput">
+                        <button class="btn btn-primary w-100 mt-2 bt_s" type="button"
+                            @click="submitDepositAmount">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--payment modal  -->
+        <div class="payment_ modal_">
+            <div class="mdal_content">
+                <div class="m_head">
+                    <h6>Payment Varification</h6>
+                    <button class="bt_close" @click="paymentclose">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+                </div>
+                <div class="_body">
+
+                    <form @submit.prevent="saveData()">
+                        <div class="form_group">
+                            <!-- <h6 class="fw-bold m-0">Recharge Order Id: 978347234723</h6> -->
+                            <p class="fw-bold mb-2">Recharge Amount: ${{ walletData.depsoitAmount }}</p>
+                            <!-- tab buttons  -->
+                            <div class="tab_btns d-flex justify-content-center">
+                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="pills-one-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-one" type="button" role="tab"
+                                            aria-controls="pills-one" aria-selected="true">Online Deposite</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="pills-two-tab" data-bs-toggle="pill"
+                                            data-bs-target="#pills-two" type="button" role="tab"
+                                            aria-controls="pills-two" aria-selected="false">Offline Deposite</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-one" role="tabpanel"
+                                    aria-labelledby="pills-one-tab">
+                                    <h6 class="mb-0">Payment Option</h6>
+                                    <input type="hidden" class="form-control rounded-0" placeholder="Deposite amount"
+                                        v-model="walletData.depsoitAmount" @keyup="validateInput">
+                                    <p>{{ walletData.payment_method }}</p>
+                                    <img src="/assets/images/780x432.png" class="img-fluid" loading="lazy" alt="">
+                                    <button class="btn btn-primary w-100 mt-2" type="submit">Confirm</button>
+                                </div>
+                                <div class="tab-pane fade show" id="pills-two" role="tabpanel"
+                                    aria-labelledby="pills-two-tab">
+                                    <!-- no data  -->
+                                    <div class="no_data">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                        <p>Offline Deposite not supported</p>
+                                    </div>
+                                    <!-- <button class="btn btn-primary w-100 mt-2" type="submit">Confirm</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- END Modal -->
     </div>
 </template>
 
 
 <script setup>
+const router = useRouter()
+import axios from "axios";
+import Swal from 'sweetalert2'
 definePageMeta({
     middleware: 'is-logged-out',
 })
+const loading = ref(false);
+const depositArr = ref([]);
+const withdrawArr = ref([]);
+const searchDOrderId = ref('');
+const searchWOrderId = ref('');
+const walletData = ref({
+    depsoitAmount: '',
+    payment_method: 'Crypto',
+})
+
+const getStatus = (status) => {
+    let result = '';
+    if (status === 0) {
+        result = 'Under review';
+    } else if (status === 1) {
+        result = 'Has been approved';
+    } else if (status === 2) {
+        result = 'Has been rejected';
+    }
+    return result;
+}
+
+const formatDate = (dateTimeString) => {
+    const date = new Date(dateTimeString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    const formattedDay = day < 10 ? '0' + day : day;
+    const formattedMonth = month < 10 ? '0' + month : month;
+    const formattedHours = hours < 10 ? '0' + hours : hours;
+    const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+    const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+
+    return `${formattedDay}-${formattedMonth}-${year} ${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+};
+
+
+const validateInput = (event) => {
+    if (/\D/g.test(event.target.value)) {
+        event.target.value = event.target.value.replace(/\D/g, '');
+    }
+}
+
+const depositModal = () => {
+    $(".depo_modal").fadeIn();
+}
+
+const depositModalCls = () => {
+    $(".depo_modal").fadeOut();
+}
+
+const submitDepositAmount = () => {
+    $(".depo_modal").fadeOut();
+
+    const depositAmount = walletData?.value?.depsoitAmount;
+    // Regular expression to match only numeric values
+    const numericRegex = /^[0-9]+$/;
+    if (!depositAmount || !numericRegex.test(depositAmount)) {
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "error",
+            title: "Please input a valid  amount"
+        });
+        return false;
+    }
+
+    $(".payment_").fadeIn();
+}
+
+const paymentclose = () => {
+    $(".payment_").fadeOut();
+}
+
+const saveData = async () => {
+    const formData = new FormData();
+    formData.append('depsoitAmount', walletData.value.depsoitAmount);
+    formData.append('payment_method', walletData.value.payment_method);
+    const headers = {
+        'Content-Type': 'multipart/form-data'
+    };
+    try {
+        const res = await axios.post('/dropUser/depositRequest', formData, { headers });
+        console.log(res);
+        walletData.value.depsoitAmount = '';
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+        Toast.fire({
+            icon: "success",
+            title: "Successfully send your request"
+        });
+        depositList();
+        paymentclose();
+        router.push('/partner/globalstores/myWallet')
+
+    } catch (error) {
+        if (error.response && error.response.status === 422) {
+            errors.value = error.response.data.errors;
+        } else {
+            console.error("An error occurred:", error);
+        }
+    }
+}
+
+const depositList = async () => {
+    try {
+        loading.value = true; // Set loading to true before making the request
+
+        let response;
+        if (searchDOrderId.value) {
+            response = await axios.get(`/dropUser/depositRequestList?orderId=${searchDOrderId.value}`);
+        } else {
+            response = await axios.get("/dropUser/depositRequestList");
+        }
+
+        depositArr.value = response.data.data;
+    } catch (error) {
+        console.error("Error fetching deposit list:", error);
+    } finally {
+        loading.value = false; // Set loading to false after the request completes (whether success or failure)
+    }
+};
+
+
+const withdrawalList = async () => {
+    try {
+        loading.value = true; // Set loading to true before making the request
+
+        let response;
+        if (searchWOrderId.value) {
+            response = await axios.get(`/dropUser/withDrawalRequestList?orderId=${searchWOrderId.value}`);
+        } else {
+            response = await axios.get("/dropUser/withDrawalRequestList");
+        }
+
+        withdrawArr.value = response.data.data;
+    } catch (error) {
+        console.error("Error fetching withdrawal list:", error);
+    } finally {
+        loading.value = false; // Set loading to false after the request completes (whether success or failure)
+    }
+};
+
+onMounted(() => {
+    depositList(); 
+    withdrawalList();
+});
+
 </script>
 
+<style scoped>
+.s_content {
+    padding: 10px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 37px #0815420d;
+}
+
+.content-header {
+    padding: 5px .5rem;
+}
+
+.dash_box {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    padding: 5px;
+    border-radius: 15px;
+    box-shadow: 0 0 37px #0815420d;
+}
+</style>

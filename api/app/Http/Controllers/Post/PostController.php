@@ -167,11 +167,10 @@ class PostController extends Controller
         return response()->json($responseData);
     }
 
-
     public function postCategoryData(Request $request)
     {
 
-        $id =  $request->id; 
+        $id =  $request->id;
         $data = Post::where('posts.categoryId', $id)
             ->select('posts.*', 'post_category.name as category_name')
             ->join('post_category', 'posts.categoryId', '=', 'post_category.id')
@@ -186,17 +185,9 @@ class PostController extends Controller
                 'answer'                     => $v->answer,
                 'description_full'           => strip_tags($v->description_full),
                 'images'                     => url($v->thumnail_img),
-                
-                
             ];
         }
         $responseData['data']  = $arryData;
         return response()->json($responseData);
     }
-
-
-
-
-
-
 }

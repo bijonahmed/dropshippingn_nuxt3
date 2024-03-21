@@ -98,8 +98,8 @@ export default defineNuxtConfig({
         { src: "/assets/js/owl.carousel.min.js", type: "text/javascript" },
         { src: "/assets/js/wow.min.js", type: "text/javascript" },
           //For Partner 
-        { src: "/assets/js/adminlte.js", type: "text/javascript" },
-        { src: "https://unpkg.com/sweetalert/dist/sweetalert.min.js",type: "text/javascript" },
+        { src: "/assets/js/adminlte.js", type: "text/javascript" }, 
+        { src: "https://cdn.jsdelivr.net/npm/sweetalert2@11",type: "text/javascript" },
         { src: "https://cdn.tiny.cloud/1/qagffr3pkuv17a8on1afax661irst1hbr4e6tbv888sz91jc/tinymce/6/tinymce.min.js",type: "text/javascript" },
       ],
     },

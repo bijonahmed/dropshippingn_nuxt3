@@ -45,12 +45,12 @@
 </template>
 <script setup>
 const router = useRouter()
+import axios from "axios";
 definePageMeta({
     middleware: 'is-logged-out',
 })
-import axios from "axios";
-const insertdata = ref({
 
+const insertdata = ref({
     name: '',
     status: '',
 })

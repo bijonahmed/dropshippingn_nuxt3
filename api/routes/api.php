@@ -20,6 +20,8 @@ use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Dropshipping\DropShiProductController;
+use App\Http\Controllers\Dropshipping\DropUserController;
+use App\Http\Controllers\Dropshipping\DepositController;
 use App\Http\Controllers\Post\PostController;
 /*
 |--------------------------------------------------------------------------
@@ -165,14 +167,10 @@ Route::group([
     Route::get('removeProducts/{id}', [ProductController::class, 'removeProducts']);
 });
 
-
-
-
 Route::group([
     'middleware' => 'api',
     'prefix' => 'dropshippingpro'
 ], function () {
-
     Route::post('save', [DropShiProductController::class, 'save']);
     Route::post('product-update', [DropShiProductController::class, 'productUpdate']);
     Route::post('insertVarientGroup', [DropShiProductController::class, 'insertVarientGroup']);
@@ -188,6 +186,30 @@ Route::group([
     Route::get('removeProducts/{id}', [DropShiProductController::class, 'removeProducts']);
 });
 
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'deposit'
+], function () {
+    Route::get('depositrow/{id}', [DepositController::class, 'depositrow']);
+    Route::get('deposit-list', [DepositController::class, 'getDepositList']);
+    Route::post('updateDepositRequest', [DepositController::class, 'updateDepositRequest']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'dropUser'
+], function () {
+    Route::post('depositRequest', [DropUserController::class, 'depositRequest']);
+    Route::post('withdrawRequest', [DropUserController::class, 'withdrawRequest']);
+    Route::get('depositRequestList', [DropUserController::class, 'depositRequestList']);
+    Route::get('withDrawalRequestList', [DropUserController::class, 'withDrawalRequestList']);
+    Route::get('getMyDepositAmount', [DropUserController::class, 'getMyDepositAmount']);
+    Route::get('getCurrencyType', [DropUserController::class, 'getCurrencyType']);
+    Route::get('checkWithdrawalMethod', [DropUserController::class, 'checkWithdrawalMethod']);
+    Route::get('chkfindWithdraInfo', [DropUserController::class, 'chkfindWithdraInfo']);
+    Route::post('makeBank', [DropUserController::class, 'makeBank']);
+    Route::post('updateMakeBank', [DropUserController::class, 'updateMakeBank']);
+});
 
 Route::group([
     'middleware' => 'api',
@@ -200,7 +222,6 @@ Route::group([
     Route::get('allPost', [PostController::class, 'allPostList']);
     Route::get('postCategoryData', [PostController::class, 'postCategoryData']);
 });
-
 
 Route::group([
     //'middleware' => 'api',

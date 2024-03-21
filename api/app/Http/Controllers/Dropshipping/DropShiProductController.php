@@ -189,8 +189,6 @@ class DropShiProductController extends Controller
         }
     }
 
-
-
     function generateUnique4DigitNumber($existingNumbers = [])
     {
         do {
@@ -199,9 +197,6 @@ class DropShiProductController extends Controller
 
         return $uniqueNumber;
     }
-
-
-
 
     public function additionaIMagesDelete(Request $request)
     {

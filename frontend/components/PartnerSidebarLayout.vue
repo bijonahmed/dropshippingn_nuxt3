@@ -8,21 +8,11 @@
             <LazyNuxtLink to="/partner/dashboard" class="brand-link">
                 <img src="/assets/images/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">Dropshipping</span>
+                <span class="brand-text font-weight-light">{{ userStore.email }}</span>
 
             </LazyNuxtLink>
 
             <div class="sidebar">
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="/assets/images/blankUser.jpg" class="img-circle elevation-2" alt="User">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block">{{ userStore.email }}</a>
-
-
-                    </div>
-                </div>
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -169,7 +159,7 @@
                                     <LazyNuxtLink to="/partner/datamanagement/bankList" class="nav-link "
                                         @click="toggleSidebar">
                                         <i class="nav-icon fa-solid fa-building-columns"></i>
-                                        <p>Bank List</p>
+                                        <p>Withdrawal Method</p>
                                     </LazyNuxtLink>
                                 </li>
                             </ul>

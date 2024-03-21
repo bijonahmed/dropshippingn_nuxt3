@@ -8,7 +8,8 @@
 
 		<div class="sidebar" ref="sidebar">
 			<nav class="mt-2">
-				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+					data-accordion="false">
 					<li class="nav-item" v-for="(item, index) in menuItems" :key="index"
 						:class="{ 'menu-open': item.open }">
 						<router-link v-if="item.route" :to="item.route" class="nav-link" @click="toggleMenu(item)">
@@ -54,7 +55,14 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const menuItems = ref([
-
+	{
+		label: 'Dashboard',
+		icon: 'fa-home',
+		badge: 'New',
+		open: false,
+		route: '/admin/dashboard',
+		children: null
+	},
 	{
 		label: 'Profile',
 		icon: 'fa-th',
@@ -75,7 +83,7 @@ const menuItems = ref([
 			{ label: 'Orders', icon: 'fa-circle', route: '/orders/list' }
 		]
 	},*/
-	 
+
 	{
 		label: 'Dropshipping',
 		icon: 'fa-folder',
@@ -85,6 +93,17 @@ const menuItems = ref([
 		children: [
 			{ label: 'Products', icon: 'fa-circle', route: '/dropshipping/product/list' },
 			{ label: 'Orders', icon: 'fa-circle', route: '/dropshipping/orders/list' }
+		]
+	},
+	{
+		label: 'Request',
+		icon: 'fa-folder',
+		badge: '6',
+		open: false,
+		route: null,
+		children: [
+			{ label: 'Deposit', icon: 'fa-circle', route: '/dropshipping/request/depositlist' },
+			{ label: 'Withdrawal', icon: 'fa-circle', route: '/dropshipping/request/withdrawallist' }
 		]
 	},
 	{
@@ -121,9 +140,9 @@ const menuItems = ref([
 		open: false,
 		route: null,
 		children: [
-		    { label: 'Add Post', icon: 'fa-circle', route: '/post/add' },
+			{ label: 'Add Post', icon: 'fa-circle', route: '/post/add' },
 			{ label: 'Post List', icon: 'fa-circle', route: '/post/list' },
-			
+
 		]
 	}
 ]);
@@ -132,4 +151,3 @@ const toggleMenu = (item) => {
 	item.open = !item.open;
 };
 </script>
-
