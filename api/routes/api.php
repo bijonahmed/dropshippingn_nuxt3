@@ -191,8 +191,11 @@ Route::group([
     'prefix' => 'deposit'
 ], function () {
     Route::get('depositrow/{id}', [DepositController::class, 'depositrow']);
+    Route::get('withdrawrow/{id}', [DepositController::class, 'withdrawrow']);
     Route::get('deposit-list', [DepositController::class, 'getDepositList']);
+    Route::get('withdrawal-list', [DepositController::class, 'getwithdrawalList']);
     Route::post('updateDepositRequest', [DepositController::class, 'updateDepositRequest']);
+    Route::post('updateWithDrawRequest', [DepositController::class, 'updateWithDrawRequest']);
 });
 
 Route::group([

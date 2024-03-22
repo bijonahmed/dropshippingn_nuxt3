@@ -13,9 +13,7 @@
                                 <li class="breadcrumb-item">
                                     <LazyNuxtLink to="/admin/dashboard">Home</LazyNuxtLink>
                                 </li>
-                                <li class="breadcrumb-item active">
-                                    <LazyNuxtLink to="/dropshipping/product/add">New</LazyNuxtLink>
-                                </li>
+                                 
                             </ol>
                         </div>
                     </div>
@@ -138,7 +136,7 @@ const totalRecords = ref(0);
 const totalPages = ref(0);
 const productdata = ref([]);
 const searchQuery = ref(""); // Add a ref for the search query
-const selectedFilter = ref(1); // Add a ref for the search query
+const selectedFilter = ref(0); // Add a ref for the search query
 
 const fetchData = async (page) => {
     try {

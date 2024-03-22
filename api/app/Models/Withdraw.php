@@ -23,6 +23,7 @@ class Withdraw extends Authenticatable
     'user_id',
     'withdraw_amount',
     'payable_amount',
+    'receivable_amount',
     'password',
     'approved_by',
     'status',

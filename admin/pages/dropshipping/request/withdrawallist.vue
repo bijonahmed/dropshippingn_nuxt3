@@ -13,9 +13,7 @@
                                 <li class="breadcrumb-item">
                                     <LazyNuxtLink to="/admin/dashboard">Home</LazyNuxtLink>
                                 </li>
-                                <li class="breadcrumb-item active">
-                                    <LazyNuxtLink to="/dropshipping/product/add">New</LazyNuxtLink>
-                                </li>
+                               
                             </ol>
                         </div>
                     </div>
@@ -29,13 +27,15 @@
                             <div class="row">
                                 <div class="col-lg-8 col-md-8 col-sm-12 mb-2">
                                     <input type="text" v-model="searchQuery" class="form-control"
-                                        placeholder="Search Product" />
+                                        placeholder="Search ID" />
                                 </div>
 
                                 <div class="col-lg-2 col-md-2 col-sm-6 mb-2">
                                     <select v-model="selectedFilter" class="form-control" @change="filterData">
-                                        <option value="1">Active Products</option>
-                                        <option value="0">Inactive Products</option>
+                                        <!-- <option value="">All</option> -->
+                                        <option value="0">Review</option>
+                                        <option value="2">Reject</option>
+                                        <option value="1">Approved</option>
                                     </select>
                                 </div>
 
@@ -56,24 +56,27 @@
                                         <table class="table w-100 table-wrapper">
                                             <thead>
                                                 <tr>
-                                                    <th>SL</th>
-                                                    <th>Product Name</th>
-                                                    <th class="text-center">Quantity</th>
+                                                    <th>ID</th>
+                                                    <th>Request By</th>
+                                                    <th class="text-center">Withdrawal Amount</th>
+                                                    <th class="text-center">Transaction Fee</th>
+                                                    <th class="text-center">Payable Amount</th>
+                                                    <th class="text-center">Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr v-for="(pro, index) in productdata" :key="index">
-                                                    <td>{{ pro.id }}</td>
+                                                    <td>{{ pro.withdrawID }}</td>
                                                     <td>{{ pro.name }}</td>
-                                                    <td class="text-center">{{ pro.stock_qty }}</td>
+                                                    <td class="text-center">{{ pro.withdraw_amount }}</td>
+                                                    <td class="text-center">{{ pro.transection_fee }}%</td>
+                                                    <td class="text-center">{{ pro.payable_amount }}</td>
+                                                    <td class="text-center">{{ pro.status }}</td>
                                                     <td>
                                                         <center>
-                                                            <span @click="edit(pro.id)"><button type="button"><i
-                                                                        class="fas fa-edit btnSize"></i></button></span>
-
-                                                            <span @click="deleteProduct(pro.id)"><button type="button"><i
-                                                                        class="fas fa-trash btnSize"></i></button></span>
+                                                            <!-- <span @click="edit(pro.id)"><button type="button"><i
+                                                                        class="fas fa-edit btnSize"></i></button></span> -->
                                                             <span @click="preview(pro.id)"><button type="button"><i
                                                                         class="fas fa-search-plus btnSize"></i></button></span>
                                                         </center>
@@ -82,9 +85,12 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th>SL</th>
-                                                    <th>Product Name</th>
-                                                    <th class="text-center">Quantity</th>
+                                                    <th>ID</th>
+                                                    <th>Request By</th>
+                                                    <th class="text-center">Withdrawal Amount</th>
+                                                    <th class="text-center">Transaction Fee (%)</th>
+                                                    <th class="text-center">Payable Amount</th>
+                                                    <th class="text-center">Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </tfoot>
@@ -92,7 +98,8 @@
 
                                         <center>
                                             <div class="pagination" style="text-align: center">
-                                                <button :disabled="currentPage === 1" @click="fetchData(currentPage - 1)">
+                                                <button :disabled="currentPage === 1"
+                                                    @click="fetchData(currentPage - 1)">
                                                     Previous
                                                 </button>
                                                 <template v-for="pageNumber in displayedPages" :key="pageNumber">
@@ -103,9 +110,9 @@
                                                 <button :disabled="currentPage === totalPages"
                                                     @click="fetchData(currentPage + 1)">
                                                     Next
-                                                </button>
+                                                </button>  
                                             </div>
-                                        </center>
+                                        </center> 
                                     </div>
                                 </div>
                             </div>
@@ -132,12 +139,12 @@ const totalRecords = ref(0);
 const totalPages = ref(0);
 const productdata = ref([]);
 const searchQuery = ref(""); // Add a ref for the search query
-const selectedFilter = ref(1); // Add a ref for the search query
+const selectedFilter = ref(0); // Add a ref for the search query
 
 const fetchData = async (page) => {
     try {
         loading.value = true;
-        const response = await axios.get(`/product/getProductList`, {
+        const response = await axios.get(`/deposit/withdrawal-list`, {
             params: {
                 page: page,
                 pageSize: pageSize,
@@ -169,7 +176,7 @@ watch(currentPage, (newPage) => {
 const edit = (id) => {
 
     router.push({
-        path: '/dropshipping/product/edit',
+        path: '/deposit/deposit-list',
         query: {
             parameter: id
         }
@@ -188,7 +195,7 @@ const deleteProduct = (id) => {
 // Define a method to handle previewing
 const preview = (id) => {
     router.push({
-        path: '/dropshipping/product/preview',
+        path: '/dropshipping/request/withdrawalPreview',
         query: {
             parameter: id
         }
@@ -198,20 +205,20 @@ const preview = (id) => {
 
 // Compute the range of displayed pages
 const displayedPages = computed(() => {
-            const maxDisplayedPages = 10; // Maximum number of displayed pages
-            const startPage = Math.max(
-                1,
-                currentPage.value - Math.floor(maxDisplayedPages / 2)
-            );
-            const endPage = Math.min(
-                totalPages.value,
-                startPage + maxDisplayedPages - 1
-            );
-            return Array.from(
-                { length: endPage - startPage + 1 },
-                (_, i) => startPage + i
-            );
-        });
+    const maxDisplayedPages = 10; // Maximum number of displayed pages
+    const startPage = Math.max(
+        1,
+        currentPage.value - Math.floor(maxDisplayedPages / 2)
+    );
+    const endPage = Math.min(
+        totalPages.value,
+        startPage + maxDisplayedPages - 1
+    );
+    return Array.from(
+        { length: endPage - startPage + 1 },
+        (_, i) => startPage + i
+    );
+});
 
 
 const filterData = () => {
@@ -229,7 +236,7 @@ const filterData = () => {
 .pagination button {
     margin: 0 5px;
     padding: 5px 10px;
-    background-color:#2f2f2f;
+    background-color: #2f2f2f;
     color: #fff;
     border: none;
     border-radius: 5px;
