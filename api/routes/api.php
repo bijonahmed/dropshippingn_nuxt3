@@ -274,6 +274,7 @@ Route::group([
     Route::get('getCartData', [CartController::class, 'getCartData']);
     Route::post('addToCart', [CartController::class, 'addToCart']);
     Route::get('searchProductCategory', [UnauthenticatedController::class, 'productCategory']);
+    Route::get('getCategory', [UnauthenticatedController::class, 'getCategory']);
 
     Route::post('checkEmail', [UnauthenticatedController::class, 'checkEmail']);
     Route::get('slidersImages', [UnauthenticatedController::class, 'slidersImages']);

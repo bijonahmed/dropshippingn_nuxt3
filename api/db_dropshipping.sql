@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2024 at 11:22 PM
+-- Generation Time: Mar 25, 2024 at 03:35 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,35 +35,6 @@ CREATE TABLE `brands` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `brands`
---
-
-INSERT INTO `brands` (`id`, `name`, `slug`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Brand-1', 'Brand-1', 1, '2024-02-15 15:40:44', '2024-02-15 15:40:44'),
-(2, 'Brand-2', 'Brand-2', 1, '2024-02-15 15:40:44', '2024-02-15 15:40:44'),
-(3, 'Brand-3', 'Brand-3', 1, '2024-02-15 15:40:44', '2024-02-15 15:40:44'),
-(4, 'Brand-4', 'Brand-1', 1, '2024-02-15 15:43:31', '2024-02-15 15:43:31'),
-(5, 'Brand-5', 'Brand-2', 1, '2024-02-15 15:43:31', '2024-02-15 15:43:31'),
-(6, 'Brand-6', 'Brand-3', 1, '2024-02-15 15:43:31', '2024-02-15 15:43:31'),
-(7, 'Brand-7', 'Brand-100', 1, '2024-02-15 15:43:31', '2024-02-15 15:43:31'),
-(8, 'ffff', 'ffff', 1, '2024-02-15 15:43:47', '2024-02-24 10:33:11'),
-(9, 'Brand-5', 'Brand-2', 1, '2024-02-15 15:43:47', '2024-02-15 15:43:47'),
-(10, 'Brand-6', 'Brand-3', 1, '2024-02-15 15:43:47', '2024-02-15 15:43:47'),
-(11, 'Brand-7', 'Brand-100', 1, '2024-02-15 15:43:47', '2024-02-15 15:43:47'),
-(12, 'Brand-8', 'Brand-1', 1, '2024-02-15 15:44:03', '2024-02-15 15:44:03'),
-(13, 'Brand-9', 'Brand-2', 1, '2024-02-15 15:44:03', '2024-02-15 15:44:03'),
-(14, 'Brand-10', 'Brand-3', 1, '2024-02-15 15:44:03', '2024-02-15 15:44:03'),
-(15, 'Brand-11', 'Brand-100', 1, '2024-02-15 15:44:03', '2024-02-15 15:44:03'),
-(16, 'sss', 'sss', 2, '2024-02-16 10:34:06', '2024-02-16 10:34:06'),
-(17, 'sss', 'sss', 1, '2024-02-16 10:34:40', '2024-02-16 10:34:40'),
-(18, 'ddddd', 'ddddd', 1, '2024-02-16 10:35:28', '2024-02-16 10:35:28'),
-(19, 'ssss', 'ssss', 1, '2024-02-16 10:36:06', '2024-02-16 10:36:06'),
-(20, 'Kamal', 'kamal', 1, '2024-02-16 10:36:16', '2024-02-16 10:36:16'),
-(21, '4878', '4878', 1, '2024-02-16 10:56:54', '2024-02-16 10:56:54'),
-(22, 'ffffff', 'ffffff', 1, '2024-02-24 10:04:19', '2024-02-24 10:04:19'),
-(23, 'hjghjghj-----88888', 'hjghjghj-----88888', 1, '2024-02-24 10:04:26', '2024-02-24 04:09:01');
 
 -- --------------------------------------------------------
 
@@ -1600,7 +1571,115 @@ INSERT INTO `logs` (`id`, `user_id`, `method`, `url`, `parameters`, `ip`, `count
 (1071, 9, 'GET', 'http://127.0.0.1:8000/api/dropUser/depositRequestList', '[]', '127.0.0.1', '', '2024-03-21 16:21:33', '2024-03-21 16:21:33'),
 (1072, 9, 'GET', 'http://127.0.0.1:8000/api/dropUser/withDrawalRequestList', '[]', '127.0.0.1', '', '2024-03-21 16:21:34', '2024-03-21 16:21:34'),
 (1073, 9, 'POST', 'http://127.0.0.1:8000/api/dropUser/depositRequest', '{\"depsoitAmount\":\"5000\",\"payment_method\":\"Crypto\"}', '127.0.0.1', '', '2024-03-21 16:22:05', '2024-03-21 16:22:05'),
-(1074, 9, 'GET', 'http://127.0.0.1:8000/api/dropUser/depositRequestList', '[]', '127.0.0.1', '', '2024-03-21 16:22:06', '2024-03-21 16:22:06');
+(1074, 9, 'GET', 'http://127.0.0.1:8000/api/dropUser/depositRequestList', '[]', '127.0.0.1', '', '2024-03-21 16:22:06', '2024-03-21 16:22:06'),
+(1075, NULL, 'POST', 'http://127.0.0.1:8000/api/auth/login', '{\"email\":\"admin@gmail.com\",\"password\":\"admin\",\"captchaInput\":\"c43Whl\",\"userCapInput\":\"c43WhI\"}', '127.0.0.1', '', '2024-03-21 22:49:32', '2024-03-21 22:49:32'),
+(1076, NULL, 'POST', 'http://127.0.0.1:8000/api/auth/login', '{\"email\":\"admin@gmail.com\",\"password\":\"admin\",\"captchaInput\":\"TnrZvy\",\"userCapInput\":\"TnrZvv\"}', '127.0.0.1', '', '2024-03-21 22:49:39', '2024-03-21 22:49:39'),
+(1077, NULL, 'GET', 'http://127.0.0.1:8000', '[]', '127.0.0.1', '', '2024-03-21 22:49:49', '2024-03-21 22:49:49'),
+(1078, NULL, 'POST', 'http://127.0.0.1:8000/api/auth/login', '{\"email\":\"admin@gmail.com\",\"password\":\"admin\",\"captchaInput\":\"VddNSp\",\"userCapInput\":\"VddNSp\"}', '127.0.0.1', '', '2024-03-21 22:49:59', '2024-03-21 22:49:59'),
+(1079, 1, 'POST', 'http://127.0.0.1:8000/api/auth/me', '[]', '127.0.0.1', '', '2024-03-21 22:50:01', '2024-03-21 22:50:01'),
+(1080, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:50:08', '2024-03-21 22:50:08'),
+(1081, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/depositrow/26', '[]', '127.0.0.1', '', '2024-03-21 22:50:14', '2024-03-21 22:50:14'),
+(1082, 1, 'GET', 'http://127.0.0.1:8000/api/product/getProductList?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:50:18', '2024-03-21 22:50:18'),
+(1083, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:51:09', '2024-03-21 22:51:09'),
+(1084, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:51:37', '2024-03-21 22:51:37'),
+(1085, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:51:40', '2024-03-21 22:51:40'),
+(1086, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:53:38', '2024-03-21 22:53:38'),
+(1087, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:53:46', '2024-03-21 22:53:46'),
+(1088, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:54:00', '2024-03-21 22:54:00'),
+(1089, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:54:16', '2024-03-21 22:54:16'),
+(1090, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:54:18', '2024-03-21 22:54:18'),
+(1091, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:54:20', '2024-03-21 22:54:20'),
+(1092, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:54:22', '2024-03-21 22:54:22'),
+(1093, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 22:54:45', '2024-03-21 22:54:45'),
+(1094, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 22:54:51', '2024-03-21 22:54:51'),
+(1095, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 22:55:04', '2024-03-21 22:55:04'),
+(1096, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 22:56:56', '2024-03-21 22:56:56'),
+(1097, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:00:35', '2024-03-21 23:00:35'),
+(1098, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:01:08', '2024-03-21 23:01:08'),
+(1099, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:01:19', '2024-03-21 23:01:19'),
+(1100, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=W20243525&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":\"W20243525\",\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:01:36', '2024-03-21 23:01:36'),
+(1101, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:01:41', '2024-03-21 23:01:41'),
+(1102, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:02:09', '2024-03-21 23:02:09'),
+(1103, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:06:38', '2024-03-21 23:06:38');
+INSERT INTO `logs` (`id`, `user_id`, `method`, `url`, `parameters`, `ip`, `country`, `created_at`, `updated_at`) VALUES
+(1104, 1, 'POST', 'http://127.0.0.1:8000/api/auth/me', '[]', '127.0.0.1', '', '2024-03-21 23:06:48', '2024-03-21 23:06:48'),
+(1105, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:06:50', '2024-03-21 23:06:50'),
+(1106, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/2', '[]', '127.0.0.1', '', '2024-03-21 23:06:52', '2024-03-21 23:06:52'),
+(1107, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:06:59', '2024-03-21 23:06:59'),
+(1108, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:07:01', '2024-03-21 23:07:01'),
+(1109, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:08:07', '2024-03-21 23:08:07'),
+(1110, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:08:43', '2024-03-21 23:08:43'),
+(1111, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:09:17', '2024-03-21 23:09:17'),
+(1112, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:09:20', '2024-03-21 23:09:20'),
+(1113, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:09:34', '2024-03-21 23:09:34'),
+(1114, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:09:53', '2024-03-21 23:09:53'),
+(1115, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:14:41', '2024-03-21 23:14:41'),
+(1116, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:14:42', '2024-03-21 23:14:42'),
+(1117, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:15:15', '2024-03-21 23:15:15'),
+(1118, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:15:36', '2024-03-21 23:15:36'),
+(1119, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:15:39', '2024-03-21 23:15:39'),
+(1120, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:16:04', '2024-03-21 23:16:04'),
+(1121, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:16:05', '2024-03-21 23:16:05'),
+(1122, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:18:00', '2024-03-21 23:18:00'),
+(1123, 1, 'POST', 'http://127.0.0.1:8000/api/deposit/updateWithDrawRequest', '{\"id\":\"1\",\"receivable_amount\":\"450\",\"status\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:19:28', '2024-03-21 23:19:28'),
+(1124, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:19:29', '2024-03-21 23:19:29'),
+(1125, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/2', '[]', '127.0.0.1', '', '2024-03-21 23:19:32', '2024-03-21 23:19:32'),
+(1126, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/2', '[]', '127.0.0.1', '', '2024-03-21 23:20:12', '2024-03-21 23:20:12'),
+(1127, 1, 'POST', 'http://127.0.0.1:8000/api/deposit/updateWithDrawRequest', '{\"id\":\"2\",\"receivable_amount\":\"300\",\"status\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:20:27', '2024-03-21 23:20:27'),
+(1128, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:20:27', '2024-03-21 23:20:27'),
+(1129, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/2', '[]', '127.0.0.1', '', '2024-03-21 23:20:34', '2024-03-21 23:20:34'),
+(1130, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/2', '[]', '127.0.0.1', '', '2024-03-21 23:21:03', '2024-03-21 23:21:03'),
+(1131, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:21:17', '2024-03-21 23:21:17'),
+(1132, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:21:19', '2024-03-21 23:21:19'),
+(1133, 1, 'POST', 'http://127.0.0.1:8000/api/deposit/updateWithDrawRequest', '{\"id\":\"1\",\"receivable_amount\":\"470\",\"status\":\"1\"}', '127.0.0.1', '', '2024-03-21 23:21:26', '2024-03-21 23:21:26'),
+(1134, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:21:26', '2024-03-21 23:21:26'),
+(1135, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 23:21:29', '2024-03-21 23:21:29'),
+(1136, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/1', '[]', '127.0.0.1', '', '2024-03-21 23:21:32', '2024-03-21 23:21:32'),
+(1137, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:21:47', '2024-03-21 23:21:47'),
+(1138, 1, 'POST', 'http://127.0.0.1:8000/api/auth/me', '[]', '127.0.0.1', '', '2024-03-21 23:21:49', '2024-03-21 23:21:49'),
+(1139, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:36:08', '2024-03-21 23:36:08'),
+(1140, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:36:23', '2024-03-21 23:36:23'),
+(1141, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/depositrow/28', '[]', '127.0.0.1', '', '2024-03-21 23:36:25', '2024-03-21 23:36:25'),
+(1142, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/deposit-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:36:33', '2024-03-21 23:36:33'),
+(1143, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawal-list?page=1&pageSize=10&searchQuery=&selectedFilter=0', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"0\"}', '127.0.0.1', '', '2024-03-21 23:36:34', '2024-03-21 23:36:34'),
+(1144, 1, 'GET', 'http://127.0.0.1:8000/api/deposit/withdrawrow/2', '[]', '127.0.0.1', '', '2024-03-21 23:36:42', '2024-03-21 23:36:42'),
+(1145, 1, 'GET', 'http://127.0.0.1:8000/api/category/getCategoryList', '[]', '127.0.0.1', '', '2024-03-21 23:36:57', '2024-03-21 23:36:57'),
+(1146, 1, 'GET', 'http://127.0.0.1:8000/api/category/getInacCategoryList', '[]', '127.0.0.1', '', '2024-03-21 23:36:58', '2024-03-21 23:36:58'),
+(1147, 1, 'POST', 'http://127.0.0.1:8000/api/auth/me', '[]', '127.0.0.1', '', '2024-03-21 23:37:04', '2024-03-21 23:37:04'),
+(1148, 1, 'GET', 'http://127.0.0.1:8000/api/category/getCategoryList', '[]', '127.0.0.1', '', '2024-03-21 23:37:09', '2024-03-21 23:37:09'),
+(1149, 1, 'GET', 'http://127.0.0.1:8000/api/category/getInacCategoryList', '[]', '127.0.0.1', '', '2024-03-21 23:37:10', '2024-03-21 23:37:10'),
+(1150, 1, 'GET', 'http://127.0.0.1:8000/api/category/categoryRow/5', '[]', '127.0.0.1', '', '2024-03-21 23:37:11', '2024-03-21 23:37:11'),
+(1151, 1, 'GET', 'http://127.0.0.1:8000/api/category/getCategoryListParent', '[]', '127.0.0.1', '', '2024-03-21 23:37:12', '2024-03-21 23:37:12'),
+(1152, 1, 'GET', 'http://127.0.0.1:8000/api/setting/slidersImages?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 23:37:50', '2024-03-21 23:37:50'),
+(1153, 1, 'GET', 'http://127.0.0.1:8000/api/brands/allbrandlist?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 23:37:52', '2024-03-21 23:37:52'),
+(1154, 1, 'GET', 'http://127.0.0.1:8000/api/brands/allbrandlist?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 23:38:06', '2024-03-21 23:38:06'),
+(1155, 1, 'GET', 'http://127.0.0.1:8000/api/setting/slidersImages?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 23:38:08', '2024-03-21 23:38:08'),
+(1156, 1, 'GET', 'http://127.0.0.1:8000/api/setting/slidersImages?page=1&pageSize=10&searchQuery=&selectedFilter=1', '{\"page\":\"1\",\"pageSize\":\"10\",\"searchQuery\":null,\"selectedFilter\":\"1\"}', '127.0.0.1', '', '2024-03-21 23:38:24', '2024-03-21 23:38:24'),
+(1157, 1, 'GET', 'http://127.0.0.1:8000/api/setting/sliderrow/4', '[]', '127.0.0.1', '', '2024-03-21 23:38:26', '2024-03-21 23:38:26'),
+(1158, 1, 'POST', 'http://127.0.0.1:8000/api/auth/me', '[]', '127.0.0.1', '', '2024-03-21 23:38:29', '2024-03-21 23:38:29'),
+(1159, 1, 'POST', 'http://127.0.0.1:8000/api/auth/logout', '[]', '127.0.0.1', '', '2024-03-21 23:39:14', '2024-03-21 23:39:14'),
+(1160, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 09:47:52', '2024-03-22 09:47:52'),
+(1161, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 09:48:26', '2024-03-22 09:48:26'),
+(1162, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:13:28', '2024-03-22 11:13:28'),
+(1163, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:13:33', '2024-03-22 11:13:33'),
+(1164, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:16:01', '2024-03-22 11:16:01'),
+(1165, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:20:27', '2024-03-22 11:20:27'),
+(1166, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:20:33', '2024-03-22 11:20:33'),
+(1167, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:20:58', '2024-03-22 11:20:58'),
+(1168, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:21:01', '2024-03-22 11:21:01'),
+(1169, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:21:03', '2024-03-22 11:21:03'),
+(1170, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:22:45', '2024-03-22 11:22:45'),
+(1171, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:24:22', '2024-03-22 11:24:22'),
+(1172, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:26:27', '2024-03-22 11:26:27'),
+(1173, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:28:20', '2024-03-22 11:28:20'),
+(1174, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:28:32', '2024-03-22 11:28:32'),
+(1175, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:30:47', '2024-03-22 11:30:47'),
+(1176, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:31:54', '2024-03-22 11:31:54'),
+(1177, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:32:53', '2024-03-22 11:32:53'),
+(1178, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:36:27', '2024-03-22 11:36:27'),
+(1179, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:39:30', '2024-03-22 11:39:30'),
+(1180, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:41:39', '2024-03-22 11:41:39'),
+(1181, NULL, 'GET', 'http://127.0.0.1:8000/api/unauthenticate/getCategory', '[]', '127.0.0.1', '', '2024-03-22 11:42:58', '2024-03-22 11:42:58');
 
 -- --------------------------------------------------------
 
@@ -2080,10 +2159,7 @@ INSERT INTO `sliders` (`id`, `images`, `redirect_url`, `status`) VALUES
 (1, '/backend/slider_imaes/3hgd3hO9eym5iopHTMyT.png', 'Slider-1', 1),
 (2, '/backend/slider_imaes/BfJxjDkSLTQ3dMqdC38O.png', 'Slider-2', 1),
 (3, '/backend/slider_imaes/GbGPlJo4uXo5tFRSVRwJ.png', 'Slider-3', 1),
-(4, '/backend/slider_imaes/x2F7I7DtHuUTcRIuEA2u.png', 'Slider-4', 1),
-(5, '/backend/slider_imaes/64Vi7Ht4Z1B5rTT6m1Ap.jpg', 'dddd', 1),
-(6, '/backend/slider_imaes/TAOohbi8RbD2xX2HsMNM.jpg', 'ggggg', 1),
-(7, '/backend/slider_imaes/GDpWm8vzUGuackZMFNpk.jpg', 'hhhhh222', 1);
+(4, '/backend/slider_imaes/x2F7I7DtHuUTcRIuEA2u.png', 'Slider-4', 1);
 
 -- --------------------------------------------------------
 
@@ -6250,7 +6326,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `inviteCode`, `ref_id`, `employee_id`, `role_id`, `email`, `name`, `phone_number`, `image`, `doc_file`, `address`, `address_1`, `address_2`, `website`, `github`, `gender`, `date_of_birth`, `twitter`, `instagram`, `nationality_id`, `state_id`, `otp`, `facebook`, `wallet_balance`, `show_password`, `password`, `with_show_password`, `with_password`, `email_verified_at`, `telegram`, `whtsapp`, `othersway_connect`, `remember_token`, `entry_by`, `register_ip`, `lastlogin_ip`, `lastlogin_country`, `lastlogin_datetime`, `created_at`, `updated_at`, `status`) VALUES
-(1, '0000123', NULL, 4, 1, 'admin@gmail.com', 'Admin', '000000001', '/backend/files/hZkagctUSINKsFU64UJr.png', NULL, 'Dhaka', '', '', 'http://localhost:3000/profile', 'http://localhost:3000/profile', '', '0000-00-00', 'http://localhost:3000/profile', 'http://localhost:3000/profile', 0, 0, NULL, 'http://localhost:3000/profile', NULL, 'admin', '$2y$10$S.DjOMlaQ1ZcTSm6zUzRKOZtDL7vO4ZI0ZjgCjSn/TvdpXpbl5eBu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '127.0.0.1', '', '2024-03-20 16:59:16', '2023-06-22 03:20:43', '2024-03-20 10:59:16', 1),
+(1, '0000123', NULL, 4, 1, 'admin@gmail.com', 'Admin', '000000001', '/backend/files/hZkagctUSINKsFU64UJr.png', NULL, 'Dhaka', '', '', 'http://localhost:3000/profile', 'http://localhost:3000/profile', '', '0000-00-00', 'http://localhost:3000/profile', 'http://localhost:3000/profile', 0, 0, NULL, 'http://localhost:3000/profile', NULL, 'admin', '$2y$10$S.DjOMlaQ1ZcTSm6zUzRKOZtDL7vO4ZI0ZjgCjSn/TvdpXpbl5eBu', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '127.0.0.1', '', '2024-03-22 04:50:00', '2023-06-22 03:20:43', '2024-03-21 22:50:00', 1),
 (8, '0000125', 1, NULL, 2, 'ahmed@gmail.com', 'ahmed', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 9513, NULL, NULL, 'ahmed@gmail.com', '$2y$10$fdLD01DcpwnyZ7IuqAMLguh9ox/0KWFHOfm5jMH1ODp3VK.uU431u', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:18:03', '2024-03-02 18:18:03', 1),
 (9, '0000126', 8, NULL, 2, 'bc@gmail.com', 'bc', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8782, NULL, NULL, 'bc@gmail.com', '$2y$10$UdGloSr1R2yrRMzJ7qbEj.AeayMVvy6Pkbdi3WSyiF/rI2XKiQ.iC', 'bangladesh@123', '$2y$10$g9ISTI/Nk0zMjPoBNPCR/.wTNjJ.Ccq6dKbcwzOc5tL1/wU300D76', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '127.0.0.1', '', '2024-03-21 15:34:35', '2024-03-02 18:23:49', '2024-03-21 09:34:35', 1),
 (10, '5879249', 8, NULL, 2, 'ibraheem@gmail.com', 'ibraheem', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1289, NULL, NULL, 'ibraheem@gmail.com', '$2y$10$b1Go/QpyOXR87AcdFf3Bp..4C2pSLpCqtC5rgJq2YJ1yBWqCXpiqm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-03-02 18:26:27', '2024-03-02 18:26:27', 1),
@@ -6296,6 +6372,7 @@ CREATE TABLE `withdraw` (
   `withdrawID` varchar(255) DEFAULT NULL,
   `depscription` text DEFAULT NULL,
   `transection_fee` int(11) NOT NULL COMMENT '%',
+  `receivable_amount` double(10,2) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `withdraw_amount` double(10,2) DEFAULT NULL,
   `payable_amount` double(10,2) DEFAULT NULL,
@@ -6311,9 +6388,9 @@ CREATE TABLE `withdraw` (
 -- Dumping data for table `withdraw`
 --
 
-INSERT INTO `withdraw` (`id`, `withdrawID`, `depscription`, `transection_fee`, `user_id`, `withdraw_amount`, `payable_amount`, `withdrawal_method_id`, `password`, `approved_by`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'W20243525', 'W20243525', 5, 9, 500.00, 475.00, 1, 'bangladesh@123', NULL, 0, '2024-03-21 21:50:05', '2024-03-21 21:50:05'),
-(2, 'W20247503', 'W20247503', 5, 9, 350.00, 332.50, 1, 'bangladesh@123', NULL, 0, '2024-03-21 21:50:53', '2024-03-21 21:50:53');
+INSERT INTO `withdraw` (`id`, `withdrawID`, `depscription`, `transection_fee`, `receivable_amount`, `user_id`, `withdraw_amount`, `payable_amount`, `withdrawal_method_id`, `password`, `approved_by`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'W20243525', 'W20243525', 5, 470.00, 9, 500.00, 475.00, 1, 'bangladesh@123', 1, 1, '2024-03-21 21:50:05', '2024-03-21 23:21:26'),
+(2, 'W20247503', 'W20247503', 5, 300.00, 9, 350.00, 332.50, 1, 'bangladesh@123', 1, 0, '2024-03-21 21:50:53', '2024-03-21 23:20:27');
 
 -- --------------------------------------------------------
 
@@ -6510,7 +6587,7 @@ ALTER TABLE `withdrawal_method`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categorys`
@@ -6552,7 +6629,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1075;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1182;
 
 --
 -- AUTO_INCREMENT for table `orders`

@@ -132,6 +132,46 @@ class UnauthenticatedController extends Controller
         return response()->json($result, 200);
     }
 
+    public function getCategory()
+    {
+
+        $mainCategories = Categorys::where('status', 1)
+            ->where('parent_id', 0)
+            ->get();
+
+        $categoryTree = [];
+
+        foreach ($mainCategories as $mainCategory) {
+            $subCategories = Categorys::where('status', 1)
+                ->where('parent_id', $mainCategory->id)
+                ->get();
+
+            $subCategoryArray = [];
+            foreach ($subCategories as $subCategory) {
+                $subCategoryArray[] = [
+                    'id'            => $subCategory->id,
+                    'name'          => $subCategory->name,
+                    'bg_images'     => !empty($subCategory->bg_images) ? url($subCategory->bg_images) : "",
+                    'logo'          => !empty($subCategory->file) ? url($subCategory->file) : "",
+                    // Add more fields if needed
+                ];
+            }
+
+            $categoryTree[] = [
+                'id'           => $mainCategory->id,
+                'name'         => $mainCategory->name,
+                'subcategories' => $subCategoryArray,
+            ];
+        }
+
+
+        return response()->json($categoryTree, 200);
+    }
+
+
+
+
+
     public function productCategory(Request $request)
     {
 

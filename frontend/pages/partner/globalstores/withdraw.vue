@@ -173,7 +173,7 @@ const validateInput = (event) => {
         const result = (withdrawal * percentageAmt) / 100; // 5% of 1000 = 50
         const pay_amont = withdrawal - result;
         withdrawData.value.payable_amount = pay_amont;
-        console.log('pay_amont', pay_amont);
+      //  console.log('pay_amont', pay_amont);
 
     }
 }
@@ -235,7 +235,7 @@ const checkWithdrawalMethod = async () => {
     try {
         let response;
         response = await axios.get("/dropUser/chkfindWithdraInfo");
-        console.log("chkfindWithdraInfo: " + response.data.data.id);
+       // console.log("chkfindWithdraInfo: " + response.data.data.id);
         withdrawData.value.bank_card = response.data.data.id;
         withdrawData.value.cyrrencytname = response.data.data.name;
 
@@ -250,7 +250,7 @@ const depositList = async () => {
 
         let response;
         response = await axios.get("/dropUser/getMyDepositAmount");
-        console.log("deposit amount is: " + response.data.data);
+        //console.log("deposit amount is: " + response.data.data);
         setting.value = response.data.setting;
         withdrawData.value.transaction_fee = response.data.setting.withdraw_service_charge;
         depositAmount.value = response.data.data;
@@ -260,6 +260,7 @@ const depositList = async () => {
         loading.value = false; // Set loading to false after the request completes (whether success or failure)
     }
 };
+
 onMounted(() => {
     depositModal();
     checkWithdrawalMethod();

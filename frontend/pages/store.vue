@@ -2,7 +2,6 @@
     <div>
         <title>Store</title>
         <Navbar />
-
         <section class="storeSlider">
             <div class="container">
                 <div class="row">
@@ -38,323 +37,105 @@
                 </div>
             </div>
         </section>
+        <!-- <center><button type="button" @click="categoryList">test</button></center> -->
+        <div class="loading-indicator" v-if="loading" style="text-align: center;">
+                    <Loader />
+                </div>
         <section class="storeSection">
             <div class="container">
-                <div class="row mt-4">
-                    <div class="col-md-12">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h4 class="fw-bold">Official Store1 </h4>
-                            <a href="shop.html">View All <i class="fa-solid fa-arrow-right"></i></a>
+                <div v-for="(category, index) in categories" :key="'category-' + index">
+                    <!-- Category -->
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h4 class="fw-bold">{{ category.name }}</h4>
+                                <nuxt-link to="/shop">View All <i class="fa-solid fa-arrow-right"></i></nuxt-link>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
 
-                        <div class="row">
-                            <div class="col-sm-6 col-md-4  py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images/contnet1.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Casio</h2></a> -->
+                    <!-- Subcategories -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div v-for="(subcategory, subIndex) in category.subcategories"
+                                    :key="'subcategory-' + subIndex" class="col-sm-6 col-md-4 py-2">
+                                    <div class="brans_content">
+                                        <img :src="subcategory.bg_images" class="content_img" alt="">
+                                        <div class="content_box">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <!-- <a href="#"><h2>{{ subcategory.name }}</h2></a> -->
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand1.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
+                                        <div class="link_box">
+                                            <div>
+                                                <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
+                                            </div>
+                                            <div class="img_box">
+                                                <nuxt-link to="/shop"><img :src="subcategory.logo" class="img-fluid"
+                                                        alt=""></nuxt-link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet2.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Logitech</h2></a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand2.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet3.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Hugo Boss</h2></a> -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand3.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet4.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Dyson</h2></a> -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand4.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet5.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Sony</h2></a> -->
-                                                <!-- <h4>Steven Street, El Carjon California, United States (US)</h4> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand5.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet6.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Lego</h2></a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand6.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-12">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <h4 class="fw-bold">Official Store2 </h4>
-                            <a href="shop.html">View All <i class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="row">
-                            <div class="col-sm-6 col-md-4  py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images/contnet1.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Casio</h2></a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand1.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet2.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Logitech</h2></a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand2.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet3.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Hugo Boss</h2></a> -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand3.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet4.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Dyson</h2></a> -->
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand4.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet5.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Sony</h2></a> -->
-                                                <!-- <h4>Steven Street, El Carjon California, United States (US)</h4> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand5.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 py-2">
-                                <div class="brans_content">
-                                    <img src="/assets/images//contnet6.jpg" class="content_img" alt="">
-                                    <div class="content_box">
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <!-- <a href="#"><h2>Lego</h2></a> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="link_box">
-                                        <div>
-                                            <!-- <a href="store.html"> Stores <i class="fa-solid fa-arrow-right"></i></a> -->
-                                        </div>
-                                        <div class="img_box">
-                                            <LazyNuxtLink to="/shop"><img src="/assets/images/brand6.jpg" class="img-fluid"
-                                                    alt=""></LazyNuxtLink>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
         <Footer />
     </div>
 </template>
 
-<script>
-export default {
-  mounted() {
-    if (process.client) {
-      $(document).ready(function () {
-        $(".sliderPart").owlCarousel({
-          items: 1,
-          loop: true,
-          margin: 5,
-          nav: false,
-          autoplay: true,
-          autoplayTimeout: 2000,
-          autoplayHoverPause: true
-        });
-      });
+<script setup>
+
+const router = useRouter()
+import axios from "axios";
+import Swal from 'sweetalert2'
+const loading = ref(false);
+const categories = ref([]);
+
+const categoryList = async () => {
+    try {
+        loading.value = true; // Set loading to true before making the request
+        let response;
+        response = await axios.get("/unauthenticate/getCategory");
+        console.log("cat array " + response.data);
+        categories.value = response.data;
+
+    } catch (error) {
+        console.error("Error fetching deposit list:", error);
+    } finally {
+        loading.value = false; // Set loading to false after the request completes (whether success or failure)
     }
-  }
-}
+};
+
+
+
+onMounted(() => {
+    categoryList();
+
+    if (process.client) {
+        $(document).ready(function () {
+            $(".sliderPart").owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 5,
+                nav: false,
+                autoplay: true,
+                autoplayTimeout: 2000,
+                autoplayHoverPause: true
+            });
+        });
+    }
+
+});
+
+
 </script>
 <!-- 
 <script setup>
