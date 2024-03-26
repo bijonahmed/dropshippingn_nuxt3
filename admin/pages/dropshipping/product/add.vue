@@ -392,6 +392,7 @@ const handleImageUpload = (event) => {
 };
 
 const saveData = () => {
+
   const formData = new FormData();
   images.value.forEach((image, index) => {
     formData.append('images[]', image.file);

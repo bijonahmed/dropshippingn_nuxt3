@@ -39,8 +39,8 @@
         </section>
         <!-- <center><button type="button" @click="categoryList">test</button></center> -->
         <div class="loading-indicator" v-if="loading" style="text-align: center;">
-                    <Loader />
-                </div>
+            <Loader />
+        </div>
         <section class="storeSection">
             <div class="container">
                 <div v-for="(category, index) in categories" :key="'category-' + index">
@@ -49,7 +49,7 @@
                         <div class="col-md-12">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h4 class="fw-bold">{{ category.name }}</h4>
-                                <nuxt-link to="/shop">View All <i class="fa-solid fa-arrow-right"></i></nuxt-link>
+                                <!-- <nuxt-link to="/shop">View All <i class="fa-solid fa-arrow-right"></i></nuxt-link> -->
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,8 @@
                                 <div v-for="(subcategory, subIndex) in category.subcategories"
                                     :key="'subcategory-' + subIndex" class="col-sm-6 col-md-4 py-2">
                                     <div class="brans_content">
-                                        <img :src="subcategory.bg_images" class="content_img" alt="">
+                                        <img :src="subcategory.bg_images" class="content_img"
+                                            alt="{{ subcategory.name }}">
                                         <div class="content_box">
                                             <div class="row">
                                                 <div class="col-8">
@@ -71,11 +72,18 @@
                                         </div>
                                         <div class="link_box">
                                             <div>
-                                                <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a> -->
+                                                <!-- <a href="store.html"> Stores  <i class="fa-solid fa-arrow-right"></i></a>
+                                                :to="'/shop/category/' + category.slug + '/' + subcategory.slug"
+                                                -->
                                             </div>
+
                                             <div class="img_box">
-                                                <nuxt-link to="/shop"><img :src="subcategory.logo" class="img-fluid"
-                                                        alt=""></nuxt-link>
+                                                <nuxt-link
+                                                    :to="{ path: '/shop/', query: { category: category.slug, subcategory: subcategory.slug } }">
+                                                    <img :src="subcategory.logo" class="img-fluid"
+                                                        :alt="subcategory.name">
+                                                </nuxt-link>
+
                                             </div>
                                         </div>
                                     </div>
@@ -114,8 +122,6 @@ const categoryList = async () => {
     }
 };
 
-
-
 onMounted(() => {
     categoryList();
 
@@ -134,7 +140,6 @@ onMounted(() => {
     }
 
 });
-
 
 </script>
 <!-- 
@@ -155,6 +160,5 @@ if (process.client) {
       });
   });
 }
-
 
 </script> -->

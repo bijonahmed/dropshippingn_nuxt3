@@ -111,7 +111,7 @@ class DropShiProductController extends Controller
 
     public function save(Request $request)
     {
-        //dd($request->all());
+      //  dd($request->all());
         $validator = Validator::make($request->all(), [
             'name'           => 'required',
             'category'       => 'required',
@@ -147,20 +147,24 @@ class DropShiProductController extends Controller
             $file_url = $uploadPath . $path;
             $data['thumnail_img'] = $file_url;
         }
-        if (empty($request->id)) {
+      
             //INSERT PRODUCT
             $product_id = Product::insertGetId($data);
             //INSERT MULTIPLE IMAGE
             if (!empty($request->file('images'))) {
                 foreach ($request->file('images') as $file) {
+
                     $name = $file->getClientOriginalName();
-                    $dic_name = uniqid() . $name;
-                    $uploadPath = '/backend/files/';
-                    $file->move(public_path() . '/backend/files/', $dic_name);
-                    // $docs[] = $name;  
-                    $img_data['images']       = $uploadPath . $dic_name;
-                    $img_data['product_id']   = $product_id;
-                    DB::table('produc_img_history')->insert($img_data);
+                    if(!empty($name)){
+                        $dic_name = uniqid() . $name;
+                        $uploadPath = '/backend/files/';
+                        $file->move(public_path() . '/backend/files/', $dic_name);
+                        // $docs[] = $name;  
+                        $img_data['images']       = $uploadPath . $dic_name;
+                        $img_data['product_id']   = $product_id;
+                        DB::table('produc_img_history')->insert($img_data);
+                    }
+                   
                 }
             }
             //INSERT MULTIPLE CATEGORY
@@ -186,7 +190,7 @@ class DropShiProductController extends Controller
             DB::table('produc_categories')->insert($formattedResults);
             $resdata['product_id'] = $product_id;
             return response()->json($resdata);
-        }
+        
     }
 
     function generateUnique4DigitNumber($existingNumbers = [])

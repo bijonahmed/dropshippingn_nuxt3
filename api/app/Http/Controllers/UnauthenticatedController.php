@@ -32,7 +32,6 @@ class UnauthenticatedController extends Controller
         return response()->json($categories);
     }
 
-
     public function generateUniqueRandomNumber()
     {
         $numbers = [];
@@ -80,8 +79,6 @@ class UnauthenticatedController extends Controller
         ];
         return response()->json($response, 200);
     }
-
-
 
     public function limitedProducts()
     {
@@ -151,6 +148,7 @@ class UnauthenticatedController extends Controller
                 $subCategoryArray[] = [
                     'id'            => $subCategory->id,
                     'name'          => $subCategory->name,
+                    'slug'          => $subCategory->slug,
                     'bg_images'     => !empty($subCategory->bg_images) ? url($subCategory->bg_images) : "",
                     'logo'          => !empty($subCategory->file) ? url($subCategory->file) : "",
                     // Add more fields if needed
@@ -160,17 +158,13 @@ class UnauthenticatedController extends Controller
             $categoryTree[] = [
                 'id'           => $mainCategory->id,
                 'name'         => $mainCategory->name,
+                'slug'         => $mainCategory->slug,
                 'subcategories' => $subCategoryArray,
             ];
         }
 
-
         return response()->json($categoryTree, 200);
     }
-
-
-
-
 
     public function productCategory(Request $request)
     {
@@ -309,13 +303,10 @@ class UnauthenticatedController extends Controller
         $data['category_name'] = $proCategorys->name;
         $data['counter']       = $products->counter;
 
-
         $product = Product::find($products->id);
         $product->counter += 1250;
         //Product::where('id', $products->id)->update(['counter' => $updateCounter]);
         $product->save();
-
-
 
         //dd($data);
         return response()->json($data, 200);
