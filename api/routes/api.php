@@ -275,8 +275,9 @@ Route::group([
     Route::post('addToCart', [CartController::class, 'addToCart']);
     Route::get('searchProductCategory', [UnauthenticatedController::class, 'productCategory']);
     Route::get('getCategory', [UnauthenticatedController::class, 'getCategory']);
-
+    Route::get('productWiseBrand', [UnauthenticatedController::class, 'productWiseBrand']);
     Route::post('checkEmail', [UnauthenticatedController::class, 'checkEmail']);
+    
     Route::get('slidersImages', [UnauthenticatedController::class, 'slidersImages']);
     Route::get('topSellingProducts', [UnauthenticatedController::class, 'topSellProducts']);
     Route::get('limitedProducts', [UnauthenticatedController::class, 'limitedProducts']);

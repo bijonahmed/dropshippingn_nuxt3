@@ -13,6 +13,7 @@ use App\Models\Sliders;
 use App\Models\ProductCategory;
 use App\Models\Categorys;
 use App\Models\VerifyEmail;
+use App\Models\ProductAdditionalImg;
 use Illuminate\Support\Str;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
@@ -26,6 +27,44 @@ class UnauthenticatedController extends Controller
     protected $frontend_url;
     protected $userid;
 
+
+    public function productWiseBrand(Request $request)
+    {
+
+        $category          = Categorys::where('slug', $request->categorySlug)->first();
+        $subcategory       = Categorys::where('slug', $request->subcategorySlug)->first();
+
+        $catId             = $category->id;
+        $subCatId          = $subcategory->id;
+        $ids                = implode(',', [$catId, $subCatId]);
+        $idsArray           = explode(',', $ids);
+
+        if (!empty($idsArray)) {
+            $query = ProductCategory::join('product', 'product.id', '=', 'produc_categories.product_id')
+            ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
+            ->select('product.*', 'categorys.name as category_name')
+            ->where('product.status', 1)
+            ->whereRaw("FIND_IN_SET($catId, produc_categories.parent_id) > 0")
+            ->whereRaw("FIND_IN_SET($subCatId, produc_categories.parent_id) > 0");
+        
+        $data = $query->get();
+        } else {
+            $data = [];
+        }
+
+
+        $result = [];
+        foreach ($data as $v) {
+            $result[] = [
+                'id'            => $v->id,
+                'name'          => substr($v->name, 0, 12) . '...',
+                'thumnail'      => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                'slug'          => $v->slug,
+                'selling_price' => $v->selling_price,
+            ];
+        }
+        return response()->json($result, 200);
+    }
     public function allCategory(Request $request)
     {
         $categories = Categorys::with('children.children.children.children.children')->where('parent_id', 0)->get();
@@ -288,27 +327,57 @@ class UnauthenticatedController extends Controller
     public function getProductrow(Request $request)
     {
 
-        $products     = Product::where('slug', $request->slug)->select('product.counter', 'product.id', 'product.name', 'description', 'thumnail_img', 'product.download_link')->first();
+        $products     = Product::where('slug', $request->slug)->select('product.selling_price', 'product.buying_price', 'product.profit', 'product.counter', 'product.id', 'product.name', 'description_full', 'description_short', 'thumnail_img', 'product.download_link')->first();
         $proCategorys = ProductCategory::where('product_id', $products->id)
-            ->select('categorys.id', 'categorys.name', 'categorys.slug')
+            ->select('produc_categories.id', 'produc_categories.parent_id', 'categorys.id', 'categorys.name', 'categorys.slug')
             ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
             ->first();
 
-        $data['product_name']  = !empty($products->name) ? $products->name : "";
-        $data['description']   = !empty($products->description) ? $products->description : "";
-        $data['thumnail_img']  = url($products->thumnail_img);
-        $data['download_link'] = !empty($products->download_link) ? $products->download_link : "";
-        $data['category_id']   = $proCategorys->id;
-        $data['category_slug'] = $proCategorys->slug;
-        $data['category_name'] = $proCategorys->name;
-        $data['counter']       = $products->counter;
 
-        $product = Product::find($products->id);
-        $product->counter += 1250;
-        //Product::where('id', $products->id)->update(['counter' => $updateCounter]);
-        $product->save();
+        $smilarPro  = ProductCategory::join('product', 'product.id', '=', 'produc_categories.product_id')
+            ->join('categorys', 'categorys.id', '=', 'produc_categories.category_id')
+            ->select('product.*', 'categorys.name as category_name')
+            ->whereNotIn('produc_categories.parent_id', [$proCategorys->parent_id])->where('product.status', 1)
+            ->limit(5) // Limiting to 10 records
+            ->get();
 
-        //dd($data);
+
+        foreach ($smilarPro as $v) {
+            $s_products[] = [
+                'id'            => $v->id,
+                'name'          => substr($v->name, 0, 12) . '...',
+                'thumnail'      => !empty($v->thumnail_img) ? url($v->thumnail_img) : "",
+                'slug'          => $v->slug,
+                'selling_price' => $v->selling_price,
+                'profit'        => $v->profit,
+                'buying_price'  => $v->buying_price,
+            ];
+        }
+
+        $addproducts  =  ProductAdditionalImg::where('product_id', $products->id)->select('images', 'id')->get();
+        foreach ($addproducts as $v) {
+            $addi_products[] = [
+                'id'            => $v->id,
+                'images'        => !empty($v->images) ? url($v->images) : "",
+            ];
+        }
+
+
+        $data['product_name']       = !empty($products->name) ? $products->name : "";
+        $data['description_full']   = !empty($products->description_full) ? $products->description_full : "";
+        $data['description_short']  = !empty($products->description_short) ? strip_tags($products->description_short) : "";
+        $data['thumnail_img']       = url($products->thumnail_img);
+        $data['download_link']      = !empty($products->download_link) ? $products->download_link : "";
+        $data['category_id']        = $proCategorys->id;
+        $data['category_slug']      = $proCategorys->slug;
+        $data['category_name']      = $proCategorys->name;
+        $data['selling_price']      = $products->selling_price;
+        $data['buying_price']       = $products->buying_price;
+        $data['profit']             = $products->profit;
+        $data['similarproducts']    = $s_products;
+        $data['addi_products']      = $addi_products;
+
+
         return response()->json($data, 200);
     }
 
